@@ -3,434 +3,380 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منظومة الإسقاط والسيطرة التكتيكية المشتركة - C4I CYBER SYTEM</title>
-
+<title>منظومة المعالجة التكتيكية الشاملة - CORTEX OS</title>
 <style>
 :root {
-    --cyber-bg: #020408;
-    --card-gradient: linear-gradient(145deg, #070d19 0%, #030710 100%);
-    --neon-blue: #00f0ff;
-    --neon-green: #39ff14;
-    --neon-red: #ff3131;
-    --gold: #e5c158;
-    --border-glow: #112240;
-    --text-white: #f1f5f9;
-    --text-slate: #8892b0;
+    --bg-main: #04060a;
+    --panel-bg: rgba(9, 14, 26, 0.75);
+    --panel-border: rgba(0, 240, 255, 0.15);
+    --neon-cyan: #00f0ff;
+    --neon-purple: #bd00ff;
+    --neon-danger: #ff0055;
+    --neon-success: #00ff66;
+    --gold: #f4d068;
+    --text-main: #e2e8f0;
+    --text-muted: #64748b;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
 
 body {
-    background-color: var(--cyber-bg);
-    color: var(--text-white);
+    background-color: var(--bg-main);
+    color: var(--text-main);
     display: flex;
+    flex-direction: column;
     height: 100vh;
     overflow: hidden;
     background-image: 
-        radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.04) 0%, transparent 60%),
-        linear-gradient(rgba(0, 240, 255, 0.003) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.003) 1px, transparent 1px);
-    background-size: 100% 100%, 30px 30px, 30px 30px;
+        radial-gradient(at 0% 0%, rgba(189, 0, 255, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 240, 255, 0.05) 0px, transparent 50%),
+        linear-gradient(rgba(255,255,255,0.002) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.002) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
 }
 
-/* القائمة الجانبية الفخمة */
-.sidebar {
-    width: 290px;
-    background: #030712;
-    border-left: 2px solid var(--border-glow);
-    display: flex;
-    flex-direction: column;
-    padding: 25px 15px;
-    box-shadow: 5px 0 30px rgba(0,0,0,0.7);
-}
-
-.system-branding {
-    text-align: center;
-    padding-bottom: 25px;
-    border-bottom: 1px double var(--neon-blue);
-    margin-bottom: 25px;
-}
-
-.radar-logo {
-    width: 80px;
-    height: 80px;
-    border: 2px dashed var(--neon-blue);
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    position: relative;
-    animation: spinRadar 6s linear infinite;
-}
-@keyframes spinRadar { 100% { transform: rotate(360deg); } }
-
-.radar-logo::after {
-    content: ''; position: absolute; width: 100%; height: 100%;
-    border-radius: 50%; border: 1px solid var(--neon-green); opacity: 0.4;
-    animation: pulseGlow 2s infinite;
-}
-@keyframes pulseGlow { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.2); opacity: 0; } }
-
-.nav-item {
-    width: 100%;
-    padding: 14px 18px;
-    margin: 6px 0;
-    background: rgba(17, 34, 64, 0.2);
-    border: 1px solid rgba(0, 240, 255, 0.05);
-    border-radius: 6px;
-    color: var(--text-slate);
-    font-size: 14px;
-    font-weight: bold;
-    text-align: right;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-item:hover, .nav-item.active {
-    background: linear-gradient(90deg, rgba(0,240,255,0.1) 0%, rgba(3,7,18,0.2) 100%);
-    border-color: var(--neon-blue);
-    color: var(--neon-blue);
-    text-shadow: 0 0 10px rgba(0,240,255,0.4);
-    transform: translateX(-5px);
-}
-
-/* مساحة العرض المركزية */
-.workspace {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 30px;
-}
-
-.header-panel {
+/* شريط التحكم العلوي الجديد والمبتكر */
+.top-mainframe-bar {
+    height: 75px;
+    background: linear-gradient(180deg, #070b14 0%, var(--bg-main) 100%);
+    border-bottom: 2px solid rgba(0, 240, 255, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-glow);
-    margin-bottom: 30px;
+    padding: 0 30px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    z-index: 10;
 }
 
-.status-tag {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(57, 255, 20, 0.06);
-    border: 1px solid var(--neon-green);
-    color: var(--neon-green);
-    padding: 8px 16px;
+.system-title-zone { display: flex; align-items: center; gap: 15px; }
+.pulse-node { width: 12px; height: 12px; background: var(--neon-cyan); border-radius: 50%; box-shadow: 0 0 15px var(--neon-cyan); animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.6; } }
+
+.navigation-sectors { display: flex; gap: 10px; }
+.sector-btn {
+    background: rgba(13, 22, 41, 0.6);
+    border: 1px solid var(--panel-border);
+    padding: 10px 24px;
+    color: var(--text-muted);
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
     border-radius: 4px;
-    font-size: 12px;
-    font-family: monospace;
-    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+.sector-btn:hover, .sector-btn.active-sector {
+    color: white;
+    border-color: var(--neon-cyan);
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2), 0 0 15px rgba(0, 240, 255, 0.1);
+    text-shadow: 0 0 8px rgba(255,255,255,0.5);
 }
 
-.cyber-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 30px;
-}
-@media(max-width: 1150px) { .cyber-grid { grid-template-columns: 1fr; } }
-
-.cyber-panel {
-    background: var(--card-gradient);
-    border: 1px solid var(--border-glow);
-    border-radius: 8px;
+/* مساحة الاستعراض الديناميكية */
+.mainframe-viewport {
+    flex: 1;
     padding: 25px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    overflow-y: auto;
+}
+
+.sector-view { display: none; animation: viewportEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.sector-view.active-view { display: block; }
+@keyframes viewportEntry { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* هيكلية البطاقات التكتيكية الفخمة */
+.grid-layout { display: grid; grid-template-columns: repeat(12, 1fr); gap: 25px; }
+.col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
+.col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+@media (max-width: 1024px) { .col-4, .col-6, .col-8 { grid-column: span 12; } }
+
+.cortex-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     position: relative;
-    overflow: hidden;
+}
+.cortex-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 15px; height: 15px;
+    border-bottom: 2px solid var(--neon-purple); border-left: 2px solid var(--neon-purple); opacity: 0.6;
 }
 
-.cyber-panel::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-}
-
-.panel-head {
-    font-size: 16px;
+.card-header {
+    font-size: 15px;
+    font-weight: 800;
     color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(136, 146, 176, 0.1);
-    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 10px;
 }
 
-/* رادار الخريطة التكتيكي التفاعلي */
-.tactical-grid-map {
+/* الرادار والمصفوفة الجغرافية المطورة */
+.matrix-radar-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    background: #02050b;
-    padding: 15px;
-    border: 1px dashed var(--neon-blue);
-    border-radius: 6px;
+    gap: 10px;
 }
-
-.grid-cell {
-    background: rgba(17, 34, 64, 0.4);
-    border: 1px solid rgba(0, 240, 255, 0.1);
-    height: 90px;
+.matrix-node {
+    background: rgba(4, 8, 16, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.08);
+    height: 80px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
+    transition: all 0.25s;
 }
-.grid-cell:hover {
-    background: rgba(0, 240, 255, 0.08);
-    border-color: var(--neon-blue);
+.matrix-node:hover {
+    border-color: var(--neon-cyan);
+    background: rgba(0, 240, 255, 0.05);
+    transform: scale(1.02);
 }
-.grid-cell .cell-id { font-size: 11px; color: var(--text-slate); position: absolute; top: 5px; right: 8px; font-family: monospace; }
-.grid-cell .cell-status { font-size: 12px; font-weight: bold; margin-top: 10px; }
-.grid-cell.compromised { border-color: var(--neon-red); background: rgba(255, 49, 49, 0.05); }
-.grid-cell.compromised .cell-status { color: var(--neon-red); animation: pulseText 1.5s infinite; }
+.matrix-node.danger-alert {
+    border-color: var(--neon-danger);
+    background: rgba(255, 0, 85, 0.05);
+    animation: flashBorder 2s infinite alternate;
+}
+@keyframes flashBorder { 0% { box-shadow: 0 0 2px rgba(255,0,85,0.2); } 100% { box-shadow: 0 0 12px rgba(255,0,85,0.4); } }
 
-@keyframes pulseText { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-
-/* محرك الشات الاستدلالي الحربي */
-.console-box {
+/* وحدة الكونسول الذكية */
+.ai-shell {
     display: flex;
     flex-direction: column;
-    height: 380px;
-    background: #010307;
-    border: 1px solid var(--border-glow);
+    height: 280px;
+    background: #020407;
+    border: 1px solid rgba(255,255,255,0.03);
     border-radius: 6px;
 }
-.console-logs { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-.log-line { font-size: 13.5px; line-height: 1.6; font-family: monospace; }
-.log-line.system { color: var(--neon-blue); }
-.log-line.user-query { color: var(--gold); }
-.log-line.result { color: #cbd5e1; padding-right: 15px; border-right: 2px solid var(--neon-green); }
+.shell-output { flex: 1; padding: 15px; overflow-y: auto; font-family: monospace; font-size: 13px; display: flex; flex-direction: column; gap: 10px; }
+.shell-input-area { display: flex; border-top: 1px solid rgba(255,255,255,0.05); background: #05080f; }
+.shell-input-area input { flex: 1; background: transparent; border: none; color: white; padding: 12px; font-family: monospace; }
+.shell-input-area input:focus { outline: none; }
 
-.console-input-group { display: flex; background: #040812; border-top: 1px solid var(--border-glow); padding: 8px; }
-.console-input-group input { background: transparent; border: none; color: white; padding: 10px; flex: 1; font-family: monospace; }
-.console-input-group input:focus { outline: none; }
+/* جداول وعناصر البيانات */
+.cortex-table { width: 100%; border-collapse: collapse; text-align: right; }
+.cortex-table th { color: var(--text-muted); font-size: 12px; padding: 12px; border-bottom: 2px solid rgba(255,255,255,0.05); }
+.cortex-table td { padding: 12px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.02); }
 
-/* عناصر المدخلات والفخامة */
 input, select, textarea {
-    width: 100%; padding: 13px 16px; margin-bottom: 15px;
-    background: #040814; border: 1px solid var(--border-glow);
-    border-radius: 4px; color: white; font-size: 13.5px; transition: all 0.3s;
+    width: 100%; padding: 12px 15px; background: #040712;
+    border: 1px solid rgba(0, 240, 255, 0.1); border-radius: 4px;
+    color: white; font-size: 13px; margin-bottom: 15px; transition: all 0.3s;
 }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0,240,255,0.2); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--neon-cyan); box-shadow: 0 0 8px rgba(0,240,255,0.15); }
 
-.cyber-btn {
-    width: 100%; padding: 13px; background: transparent;
-    border: 1px solid var(--neon-blue); color: var(--neon-blue);
-    font-weight: bold; font-size: 13.5px; cursor: pointer; border-radius: 4px;
-    transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;
+.cortex-btn {
+    width: 100%; padding: 12px; background: transparent; border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan); font-weight: bold; font-size: 13px; cursor: pointer; border-radius: 4px;
+    transition: all 0.3s; text-transform: uppercase;
 }
-.cyber-btn:hover { background: var(--neon-blue); color: black; box-shadow: 0 0 15px rgba(0,240,255,0.4); }
+.cortex-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
+.cortex-btn.btn-purple { border-color: var(--neon-purple); color: var(--neon-purple); }
+.cortex-btn.btn-purple:hover { background: var(--neon-purple); color: white; box-shadow: 0 0 15px rgba(189, 0, 255, 0.3); }
+.cortex-btn.btn-danger { border-color: var(--neon-danger); color: var(--neon-danger); }
+.cortex-btn.btn-danger:hover { background: var(--neon-danger); color: white; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
 
-.cyber-btn.danger { border-color: var(--neon-red); color: var(--neon-red); }
-.cyber-btn.danger:hover { background: var(--neon-red); color: white; box-shadow: 0 0 15px rgba(255,49,49,0.4); }
-
-.cyber-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: monospace; }
-.cyber-table th { background: #050b14; color: var(--gold); padding: 14px; text-align: right; border: 1px solid var(--border-glow); font-size: 13px; }
-.cyber-table td { padding: 12px 14px; border: 1px solid var(--border-glow); font-size: 13px; color: #cbd5e1; }
-
-.secure-lock-gate { max-width: 450px; margin: 60px auto; text-align: center; padding: 35px; border: 1px solid var(--neon-red); background: rgba(255,49,49,0.02); border-radius: 6px; box-shadow: 0 0 25px rgba(255,49,49,0.05); }
-
-.data-view-scroll { max-height: 400px; overflow-y: auto; }
-.tactical-card { background: #040814; border: 1px solid var(--border-glow); padding: 15px; border-radius: 6px; margin-bottom: 15px; border-right: 4px solid var(--neon-blue); }
-
-.page-view { display: none !important; }
-.page-view.active-view { display: block !important; animation: scanline 0.4s ease-out; }
-
-@keyframes scanline { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-/* لوحة استعراض الملابس المطبوعة الفخمة */
-#printOutfitReceipt {
-    background: #030710; border: 1px double var(--gold); padding: 20px; border-radius: 6px; margin-top: 20px; font-family: monospace; display: none;
+/* الخزنة والمحاذاة التكتيكية للكرت المطبوع */
+#badgePrintOutput {
+    background: linear-gradient(135deg, #090f1e 0%, #03060c 100%);
+    border: 1px solid var(--gold); border-radius: 6px; padding: 20px; margin-top: 15px; display: none;
 }
+.secure-gate-screen { max-width: 400px; margin: 80px auto; text-align: center; }
+
+.scrolling-container { max-height: 350px; overflow-y: auto; padding-right: 5px; }
+.op-card-node { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-right: 4px solid var(--neon-cyan); padding: 15px; border-radius: 4px; margin-bottom: 15px; }
 </style>
 </head>
 <body>
 
-    <!-- 📲 قائمة السيطرة الجانبية المستقبلية -->
-    <div class="sidebar">
-        <div class="system-branding">
-            <div class="radar-logo">📡</div>
-            <div class="logo-text" style="color: var(--neon-blue); font-weight: 900; font-size: 19px; letter-spacing: 1px;">A.I.S.O MISSION</div>
-            <div style="font-size: 10px; color: var(--text-slate); margin-top: 5px;">TACTICAL C4I PLATFORM</div>
+    <!-- 🌌 شريط التحكم والسيادة الموحد -->
+    <div class="top-mainframe-bar">
+        <div class="system-title-zone">
+            <div class="pulse-node"></div>
+            <div>
+                <h1 style="font-size: 18px; font-weight: 900; letter-spacing: 1px; color: white;">CORTEX CENTRAL OS</h1>
+                <p style="font-size: 10px; color: var(--neon-cyan); font-family: monospace;">TACTICAL OPERATIONAL INTELLIGENCE</p>
+            </div>
         </div>
-        <button id="nav-hub" class="nav-item active" onclick="showView('hub')">🖥️ مركز القيادة والرادار</button>
-        <button id="nav-forces" class="nav-item" onclick="showView('forces')">👥 شجرة توزيع القوة</button>
-        <button id="nav-outfit" class="nav-item" onclick="showView('outfit')">⚙️ مهندس العتاد والتجهيز</button>
-        <button id="nav-ops" class="nav-item" onclick="showView('ops')">🎯 إدارة المداهمات الفورية</button>
-        <button id="nav-vault" class="nav-item" onclick="showView('vault')">🔒 الأرشيف الأسود المشفر</button>
+        
+        <div class="navigation-sectors">
+            <button id="sect-btn-main" class="sector-btn active-sector" onclick="switchSector('main')">🧠 مركز المعالجة الفورية</button>
+            <button id="sect-btn-logistics" class="sector-btn" onclick="switchSector('logistics')">🛡️ ترسانة التجهيز اللوجستي</button>
+            <button id="sect-btn-blackops" class="sector-btn" onclick="switchSector('blackops')">☣️ قطاع العمليات والملفات السوداء</button>
+        </div>
+
+        <div style="font-size: 11px; font-family: monospace; color: var(--text-muted);">
+            SECURITY: KEY-SECURE // PROTOCOL 2026
+        </div>
     </div>
 
-    <!-- 🖥️ مساحة العمل والمعالجة -->
-    <div class="workspace">
-        <div class="header-panel">
-            <h2 style="font-size: 22px; font-weight: 800; letter-spacing: 1px;">منظومة السيطرة التكتيكية الموحدة</h2>
-            <div class="status-tag"><span style="width:7px; height:7px; background:var(--neon-green); border-radius:50%;"></span> ENCRYPTION LEVEL: SECURE SHA-256</div>
-        </div>
+    <!-- 🖥️ ساحة استعراض القطاعات الفخمة -->
+    <div class="mainframe-viewport">
 
-        <!-- ================= 1. مركز القيادة والرادار التفاعلي ================= -->
-        <div id="view-hub" class="page-view active-view">
-            <div class="cyber-grid">
-                <div class="cyber-panel">
-                    <div class="panel-head">📡 رادار توزيع الهدف والمربعات الجغرافية الحية</div>
-                    <p style="color: var(--text-slate); font-size: 13px; margin-bottom: 15px;">اضغط على المربع الأمني المصاب باللون الأحمر لعرض إحداثيات الهدف الجنائي ونوع التهديد المكتشف فوراً.</p>
-                    <div class="tactical-grid-map">
-                        <div class="grid-cell" onclick="inspectGrid('Alpha-1', 'آمن')"><span class="cell-id">A-1</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
-                        <div class="grid-cell compromised" onclick="inspectGrid('Alpha-2', 'خلية مشبوهة - تجارة أسلحة غير قانونية')"><span class="cell-id">A-2</span><span class="cell-status">TARGET DETECTED</span></div>
-                        <div class="grid-cell" onclick="inspectGrid('Alpha-3', 'آمن')"><span class="cell-id">A-3</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
-                        <div class="grid-cell" onclick="inspectGrid('Bravo-1', 'آمن')"><span class="cell-id">B-1</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
-                        <div class="grid-cell" onclick="inspectGrid('Bravo-2', 'آمن')"><span class="cell-id">B-2</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
-                        <div class="grid-cell" onclick="inspectGrid('Bravo-3', 'آمن')"><span class="cell-id">B-3</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
-                        <div class="grid-cell compromised" onclick="inspectGrid('Charlie-1', 'تحصن مطلوب خطير صادر بحقه حكم فيدرالي')"><span class="cell-id">C-1</span><span class="cell-status">HOSTILE ZONE</span></div>
-                        <div class="grid-cell" onclick="inspectGrid('Charlie-2', 'آمن')"><span class="cell-id">C-2</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+        <!-- ================= 1. قطاع المعالجة الفورية والشبكة ================= -->
+        <div id="sector-main" class="sector-view active-view">
+            <div class="grid-layout">
+                
+                <div class="col-8 cortex-card">
+                    <div class="card-header">
+                        <span>📡 مصفوفة الرادار والاستطلاع الجغرافي الموحد</span>
+                        <span style="font-size:11px; color:var(--neon-cyan);">LIVE FEED</span>
                     </div>
-                    <div id="gridReportArea" style="margin-top:15px; padding:12px; background:rgba(0,240,255,0.03); border:1px solid var(--border-glow); border-radius:4px; font-family:monospace; font-size:13px; display:none;"></div>
+                    <div class="matrix-radar-grid">
+                        <div class="matrix-node" onclick="triggerNode('A-1', 'القطاع مستقر وآمن بالكامل.')"><span style="font-size:11px;color:var(--text-muted);">LOC // A-1</span><span style="color:var(--neon-success); font-weight:bold; font-size:12px; margin-top:5px;">CLEAR</span></div>
+                        <div class="matrix-node danger-alert" onclick="triggerNode('A-2', 'تم رصد تحركات مشبوهة لمركبات غير معرفة.')"><span style="font-size:11px;color:rgba(255,255,255,0.4)">LOC // A-2</span><span style="color:var(--neon-danger); font-weight:bold; font-size:12px; margin-top:5px;">ALERT DETECTED</span></div>
+                        <div class="matrix-node" onclick="triggerNode('B-1', 'القطاع مستقر وآمن بالكامل.')"><span style="font-size:11px;color:var(--text-muted);">LOC // B-1</span><span style="color:var(--neon-success); font-weight:bold; font-size:12px; margin-top:5px;">CLEAR</span></div>
+                        <div class="matrix-node" onclick="triggerNode('B-2', 'القطاع مستقر وآمن بالكامل.')"><span style="font-size:11px;color:var(--text-muted);">LOC // B-2</span><span style="color:var(--neon-success); font-weight:bold; font-size:12px; margin-top:5px;">CLEAR</span></div>
+                        <div class="matrix-node danger-alert" onclick="triggerNode('C-1', 'تجمع مطلوبين جنائياً في قطاع وعزل تام.')"><span style="font-size:11px;color:rgba(255,255,255,0.4)">LOC // C-1</span><span style="color:var(--neon-danger); font-weight:bold; font-size:12px; margin-top:5px;">HOSTILE ZONE</span></div>
+                        <div class="matrix-node" onclick="triggerNode('C-2', 'القطاع مستقر وآمن بالكامل.')"><span style="font-size:11px;color:var(--text-muted);">LOC // C-2</span><span style="color:var(--neon-success); font-weight:bold; font-size:12px; margin-top:5px;">CLEAR</span></div>
+                        <div class="matrix-node" onclick="triggerNode('D-1', 'القطاع مستقر وآمن بالكامل.')"><span style="font-size:11px;color:var(--text-muted);">LOC // D-1</span><span style="color:var(--neon-success); font-weight:bold; font-size:12px; margin-top:5px;">CLEAR</span></div>
+                        <div class="matrix-node" onclick="triggerNode('D-2', 'القطاع مستقر وآمن بالكامل.')"><span style="font-size:11px;color:var(--text-muted);">LOC // D-2</span><span style="color:var(--neon-success); font-weight:bold; font-size:12px; margin-top:5px;">CLEAR</span></div>
+                    </div>
+                    <div id="nodeFeedbackPanel" style="margin-top:15px; padding:12px; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.05); border-radius:4px; font-size:12.5px; display:none; font-family:monospace;"></div>
                 </div>
 
-                <div class="cyber-panel">
-                    <div class="panel-head" style="color: var(--neon-blue);">🤖 العقل التكتيكي الاستدلالي الحاصِر</div>
-                    <div class="console-box">
-                        <div class="console-logs" id="consoleLogs">
-                            <div class="log-line system">[SYSTEM AI] مرحباً بك سيادة القائد في واجهة التحليل الهيكلي الفوري. اكتب استعلامك لفرز القوة البشرية الحية والمزامنة فوراً بالسيرفر.</div>
+                <div class="col-4 cortex-card">
+                    <div class="card-header">🤖 معالج الفرز الهيكلي الاستدلالي</div>
+                    <div class="ai-shell">
+                        <div class="shell-output" id="shellOutputArea">
+                            <div style="color:var(--neon-purple);">[CORTEX SYSTEM] مرحباً سيادة القائد. اكتب شفرة الفرز لفرز الأطقم (مثال: فرقة الفا، رتبة member، القوة كاملة) لمعالجتها فوراً.</div>
                         </div>
-                        <div class="console-input-group">
-                            <input id="consoleInput" placeholder="أدخل أمر الفرز (مثال: فرقة الفا، رتبة member، كامل القوة)..." autocomplete="off">
-                            <button class="cyber-btn" style="width:auto; padding:0 15px;" onclick="executeConsoleCommand()">معالجة</button>
+                        <div class="shell-input-area">
+                            <input id="shellInputField" placeholder="أدخل استعلام الفرز هنا..." autocomplete="off">
+                            <button class="cortex-btn" style="width:auto; padding:0 15px; border:none; color:var(--neon-cyan);" onclick="processShellCommand()">تشغيل</button>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12 cortex-card">
+                    <div class="card-header">
+                        <span>👥 شجرة الأطقم البشرية ومجموعات السوات المزامنة سحابياً</span>
+                        <button class="cortex-btn" style="width:auto; padding:5px 15px;" onclick="toggleElement('registrationFormZone')">+ تعميد كادر جديد</button>
+                    </div>
+
+                    <div id="registrationFormZone" style="display:none; background:rgba(0,0,0,0.4); padding:20px; border-radius:6px; margin-bottom:20px; border:1px solid var(--neon-purple);">
+                        <h4 style="color:var(--neon-purple); font-size:13.5px; margin-bottom:15px;">📝 تعميد ملف كادر جديد في السيرفر المركزي</h4>
+                        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:15px;">
+                            <input id="memberCode" placeholder="المعرف العسكري">
+                            <input id="memberName" placeholder="الاسم الكامل">
+                            <input id="memberRank" placeholder="الرتبة التكتيكية">
+                            <input id="memberUnit" placeholder="الوحدة (Alpha / Bravo)">
+                        </div>
+                        <button class="cortex-btn btn-purple" id="btnUploadMember">حفظ وإرسال للسيرفر السحابي</button>
+                    </div>
+
+                    <table class="cortex-table">
+                        <thead>
+                            <tr><th>المعرف المعياري</th><th>اسم الضابط التكتيكي</th><th>الرتبة العسكرية</th><th>الفرقة القتالية</th><th>الإجراء</th></tr>
+                        </thead>
+                        <tbody id="baseMembersRows">
+                            <tr style="background:rgba(244,208,104,0.02); font-weight:bold;"><td style="color:var(--gold);">01</td><td>FAHAD ALMUTAIRI</td><td style="color:var(--gold);">R-0 SWAT Chief</td><td>Command</td><td>-</td></tr>
+                            <tr><td>02</td><td>KARLOS ALMUTAIRI</td><td>R-1 Deputy Chief</td><td>Command</td><td>-</td></tr>
+                            <tr><td>03</td><td>Turki Al-Mutairi</td><td>R-2 Assistant Chief</td><td>Leader Alpha</td><td>-</td></tr>
+                            <tr><td>04</td><td>James Morgan</td><td>R-3 Supervisor</td><td>Leader Bravo</td><td>-</td></tr>
+                            <tr><td>05</td><td>Mov Marley</td><td>R-4 Member</td><td>Alpha</td><td>-</td></tr>
+                            <tr><td>06</td><td>Sicr Exxon</td><td>R-5 Member</td><td>Alpha</td><td>-</td></tr>
+                            <tr><td>07</td><td>Marcus Leno</td><td>R-6 Member</td><td>Alpha</td><td>-</td></tr>
+                            <tr><td>08</td><td>James Kruise</td><td>R-7 Member</td><td>Alpha</td><td>-</td></tr>
+                            <tr><td>09</td><td>Older Mohammed</td><td>R-8 Member</td><td>Alpha</td><td>-</td></tr>
+                            <tr><td>10</td><td>Badr Al-Mutairi</td><td>R-9 Member</td><td>Bravo</td><td>-</td></tr>
+                            <tr><td>11</td><td>ريان خالد</td><td>R-10 Member</td><td>Bravo</td><td>-</td></tr>
+                            <tr><td>12</td><td>JOHN Marly</td><td>R-11 Member</td><td>Bravo</td><td>-</td></tr>
+                            <tr><td>13</td><td>Ahmed Almutairi</td><td>R-12 Member</td><td>Bravo</td><td>-</td></tr>
+                        </tbody>
+                        <tbody id="cloudMembersRows"></tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
 
-        <!-- ================= 2. شجرة وتوزيع القوة البشرية ================= -->
-        <div id="view-forces" class="page-view">
-            <div class="cyber-panel">
-                <div class="panel-head">
-                    <span>👥 شجرة الأطقم البشرية ومجموعات السوات المعتمدة</span>
-                    <button class="cyber-btn" style="width:auto; padding:5px 15px;" onclick="toggleForm('forceAddForm')">+ إضافة كادر</button>
-                </div>
-
-                <div id="forceAddForm" style="display:none; background:#040812; padding:20px; border-radius:6px; margin-bottom:20px; border:1px solid var(--neon-blue);">
-                    <h4 style="color: var(--neon-blue); margin-bottom:15px; font-size:14px;">📝 إدراج كادر جديد وتعميده بقاعدة البيانات السحابية</h4>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                        <input id="fCode" placeholder="الرقم التعريفي العسكري">
-                        <input id="fName" placeholder="الاسم الرباعي الكامل">
-                        <input id="fRank" placeholder="الرتبة التكتيكية المعينة">
-                        <input id="fUnit" placeholder="الوحدة القتالية (Alpha / Bravo)">
-                    </div>
-                    <button class="cyber-btn" id="btnSaveMember">تثبيت وتعميد في خادم Firebase</button>
-                </div>
-
-                <table class="cyber-table">
-                    <thead>
-                        <tr><th>المعرف المعياري</th><th>اسم الضابط التكتيكي</th><th>الرتبة العسكرية</th><th>الفرقة القتالية</th><th>صلاحية الشطب</th></tr>
-                    </thead>
-                    <tbody id="staticMembersList">
-                        <tr style="background: rgba(229, 193, 88, 0.03); font-weight: bold;"><td style="color:var(--gold);">01</td><td>FAHAD ALMUTAIRI</td><td style="color:var(--gold);">R-0 SWAT Chief</td><td>Command</td><td>-</td></tr>
-                        <tr><td>02</td><td>KARLOS ALMUTAIRI</td><td>R-1 Deputy Chief</td><td>Command</td><td>-</td></tr>
-                        <tr><td>03</td><td>Turki Al-Mutairi</td><td>R-2 Assistant Chief</td><td>Leader Alpha</td><td>-</td></tr>
-                        <tr><td>04</td><td>James Morgan</td><td>R-3 Supervisor</td><td>Leader Bravo</td><td>-</td></tr>
-                        <tr><td>05</td><td>Mov Marley</td><td>R-4 Member</td><td>Alpha</td><td>-</td></tr>
-                        <tr><td>06</td><td>Sicr Exxon</td><td>R-5 Member</td><td>Alpha</td><td>-</td></tr>
-                        <tr><td>07</td><td>Marcus Leno</td><td>R-6 Member</td><td>Alpha</td><td>-</td></tr>
-                        <tr><td>08</td><td>James Kruise</td><td>R-7 Member</td><td>Alpha</td><td>-</td></tr>
-                        <tr><td>09</td><td>Older Mohammed</td><td>R-8 Member</td><td>Alpha</td><td>-</td></tr>
-                        <tr><td>10</td><td>Badr Al-Mutairi</td><td>R-9 Member</td><td>Bravo</td><td>-</td></tr>
-                        <tr><td>11</td><td>ريان خالد</td><td>R-10 Member</td><td>Bravo</td><td>-</td></tr>
-                        <tr><td>12</td><td>JOHN Marly</td><td>R-11 Member</td><td>Bravo</td><td>-</td></tr>
-                        <tr><td>13</td><td>Ahmed Almutairi</td><td>R-12 Member</td><td>Bravo</td><td>-</td></tr>
-                    </tbody>
-                    <tbody id="dynamicMembersList"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ================= 3. مهندس العتاد والتجهيز التفاعلي ================= -->
-        <div id="view-outfit" class="page-view">
-            <div class="cyber-grid">
-                <div class="cyber-panel">
-                    <div class="panel-head">⚙️ مهندس ومولد مواصفات تسليح وعتاد الأطقم</div>
-                    <input id="outfitTargetName" placeholder="اسم الضابط المراد تجهيزه">
-                    <select id="outfitRankSelection">
+        <!-- ================= 2. ترسانة التجهيز والهندام اللوجستي ================= -->
+        <div id="sector-logistics" class="sector-view">
+            <div class="grid-layout">
+                <div class="col-6 cortex-card">
+                    <div class="card-header">⚙️ وحدة هندسة العتاد وتخصيص الأطقم الميدانية</div>
+                    <input id="logisticsName" placeholder="اسم الفرد المراد تعميده">
+                    <select id="logisticsRank">
                         <option value="القيادة العليا (Chief / Deputy)">القيادة العليا (Chief / Deputy)</option>
                         <option value="المشرفين والموجهين (Supervisor)">المشرفين والموجهين (Supervisor)</option>
                         <option value="عناصر الاقتحام والممبار (Members)">عناصر الاقتحام والممبار (Members)</option>
                     </select>
-                    <select id="outfitWeapon">
+                    <select id="logisticsWeapon">
                         <option value="M4A1 Tactical Assault Rifle">M4A1 Tactical Assault Rifle</option>
                         <option value="MP5 Submachine Gun Optimized">MP5 Submachine Gun Optimized</option>
                         <option value="Remington 870 Tactical Shotgun">Remington 870 Tactical Shotgun</option>
                     </select>
-                    <select id="outfitVest">
+                    <select id="logisticsArmor">
                         <option value="Heavy Plate Carrier Level IV (الدرع الثقيل)">Heavy Plate Carrier Level IV (الدرع الثقيل)</option>
                         <option value="Light Recon Vest Level III (الدرع الخفيف)">Light Recon Vest Level III (الدرع الخفيف)</option>
                     </select>
-                    
-                    <button class="cyber-btn" onclick="generateTacticalOutfitCode()">إصدار وثيقة العتاد الرسمية</button>
+                    <button class="cortex-btn btn-purple" onclick="buildTacticalBadge()">إصدار وثيقة العتاد الرسمية</button>
                 </div>
-                <div class="cyber-panel">
-                    <div class="panel-head">📄 وثيقة التجهيز العسكري المعتمدة للطباعة</div>
-                    <div id="outfitPlaceholderText" style="color:var(--text-slate); text-align:center; padding-top:40px; font-size:13px;">قم بتعبئة النموذج لإنشاء الباركود ووثيقة الهندام الرسمية.</div>
-                    <div id="printOutfitReceipt"></div>
+
+                <div class="col-6 cortex-card">
+                    <div class="card-header">📄 وثيقة الهوية والهندام المعتمدة المولدّة</div>
+                    <div id="badgeFallbackText" style="text-align:center; color:var(--text-muted); padding-top:60px; font-size:13px;">في انتظار إدخال البيانات لإصدار الباركود ووثيقة الهندام...</div>
+                    <div id="badgePrintOutput"></div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= 4. إدارة المداهمات والتنسيق التكتيكي ================= -->
-        <div id="view-ops" class="page-view">
-            <div class="cyber-grid">
-                <div class="cyber-panel">
-                    <div class="panel-head">🎯 تخطيط ورفع تعاميم المداهمات الأمنية الحية</div>
-                    <input id="opTitle" placeholder="الاسم التكتيكي للعملية الرمزية">
-                    <input id="opLeader" placeholder="👮 الضابط القائد المسؤول ميدانياً">
-                    <select id="opRiskLevel">
+        <!-- ================= 3. قطاع العمليات والملفات السوداء ================= -->
+        <div id="sector-blackops" class="sector-view">
+            
+            <!-- شاشة القفل المحمية للملفات السرية -->
+            <div id="vaultAuthenticationGate" class="secure-gate-screen">
+                <div class="cortex-card" style="border-color:var(--neon-danger); background:rgba(255,0,85,0.02)">
+                    <h3 style="color:var(--neon-danger); margin-bottom:10px; font-weight:900;">🚨 منطقة عمليات محظورة وعالية التشفير</h3>
+                    <p style="color:var(--text-muted); font-size:12px; margin-bottom:20px;">يتطلب فك التشفير إدخال مفتاح الولاء الرئاسي للوصول للمحاضر والترشيحات العليا.</p>
+                    <input id="cortexMasterKey" type="password" placeholder="أدخل رمز المرور الرئاسي المشفر" style="text-align:center;">
+                    <button class="cortex-btn btn-danger" onclick="verifyCortexVault()">التحقق وفك التشفير الفوري</button>
+                </div>
+            </div>
+
+            <!-- المحتوى السري المدمج بعد التحقق -->
+            <div id="vaultCoreContent" style="display:none;" class="grid-layout">
+                <div class="col-6 cortex-card">
+                    <div class="card-header">🎯 رفع تعاميم وإحداثيات المداهمات الفورية</div>
+                    <input id="missionTitle" placeholder="الاسم الرمزي للعملية التكتيكية">
+                    <input id="missionLeader" placeholder="👮 القائد الميداني المسؤول">
+                    <select id="missionRisk">
                         <option value="CRITICAL - خطر للغاية">CRITICAL - خطورة عالية جداً</option>
                         <option value="HIGH - خطر">HIGH - خطورة متوسطة</option>
                         <option value="MEDIUM - اعتيادي">MEDIUM - مداهمة اعتيادية</option>
                     </select>
-                    <textarea id="opPlanDesc" placeholder="📝 المحاور والتعليمات التكتيكية الصارمة للاقتحام..." style="height:100px;"></textarea>
-                    
-                    <button class="cyber-btn" style="margin-bottom:12px; border-color:var(--gold); color:var(--gold);" onclick="aiGenerateOpPlan()">🤖 اشتقاق وسيناريو التسلل بالذكاء الاصطناعي</button>
-                    <button class="cyber-btn" id="btnSaveOp">بث البرقية العملياتية وتثبيتها بالسيرفر</button>
+                    <textarea id="missionDesc" placeholder="المحاور والخطط والسيناريو الميداني المعتمد للأطقم..." style="height:90px;"></textarea>
+                    <button class="cortex-btn" style="margin-bottom:12px; border-color:var(--gold); color:var(--gold);" onclick="generateAiTacticalPlan()">🤖 اشتقاق خطة التسلل التلقائية بالذكاء الاصطناعي</button>
+                    <button class="cortex-btn btn-danger" id="btnUploadMission">بث التعميم السحابي فوراً</button>
                 </div>
-                <div class="cyber-panel">
-                    <div class="panel-head">📋 خطط المداهمات النشطة قيد التعميم والمتابعة</div>
-                    <div id="opsRealtimeContainer" class="data-view-scroll"></div>
-                </div>
-            </div>
-        </div>
 
-        <!-- ================= 5. أرشيف الخزنة السوداء المغلقة ================= -->
-        <div id="view-vault" class="page-view">
-            <div id="vaultLockScreen" class="secure-lock-gate">
-                <h3 style="color: var(--neon-red); margin-bottom:10px;">🚨 تحذير: أنت تحاول الدخول للأرشيف الأسود السري للغاية</h3>
-                <p style="color: var(--text-slate); font-size:12.5px; margin-bottom:20px;">هذا القسم يحتوي على محاضر الأحداث السرية والترشيحات الإدارية العليا للمجموعة</p>
-                <input id="vaultMasterKey" type="password" placeholder="أدخل رمز فك التشفير الرئاسي المشفر" style="text-align:center;">
-                <button class="cyber-btn danger" onclick="unlockMasterVault()">التحقق من الهوية المشفرة</button>
+                <div class="col-6 cortex-card">
+                    <div class="card-header">📋 البرقيات العملياتية والمداهمات النشطة بالسيرفر</div>
+                    <div id="missionsLiveBox" class="scrolling-container"></div>
+                </div>
+
+                <div class="col-6 cortex-card">
+                    <div class="card-header" style="color:var(--neon-danger);">📂 الأرشيف الفيدرالي ومحاضر الأحداث السرية</div>
+                    <div id="reportsLiveBox" class="scrolling-container"></div>
+                </div>
+
+                <div class="col-6 cortex-card">
+                    <div class="card-header" style="color:var(--gold);">🎖️ ترشيحات وتزكيات القيادة العليا للمجموعة</div>
+                    <div id="nominationsLiveBox" class="scrolling-container"></div>
+                </div>
             </div>
 
-            <div id="vaultRealContent" style="display:none;" class="cyber-grid">
-                <div class="cyber-panel">
-                    <div class="panel-head" style="color: var(--neon-red);">📂 سجل محاضر الأحداث السرية والتقارير الفيدرالية</div>
-                    <div id="vaultReportsContainer" class="data-view-scroll"></div>
-                </div>
-                <div class="cyber-panel">
-                    <div class="panel-head" style="color: var(--gold);">🎖️ تزكيات وترقيات الكوادر المرفوعة للقيادة</div>
-                    <div id="vaultNominationsContainer" class="data-view-scroll"></div>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -452,9 +398,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const MASTER_PASSWORD = "1029";
+const AUTH_KEY = "1029";
 
-const staticForces = [
+const staticRegistry = [
     { code: "01", name: "FAHAD ALMUTAIRI", rank: "R-0 SWAT Chief", unit: "Command" },
     { code: "02", name: "KARLOS ALMUTAIRI", rank: "R-1 Deputy Chief", unit: "Command" },
     { code: "03", name: "Turki Al-Mutairi", rank: "R-2 Assistant Chief", unit: "Alpha" },
@@ -470,241 +416,236 @@ const staticForces = [
     { code: "13", name: "Ahmed Almutairi", rank: "R-12 Member", unit: "Bravo" }
 ];
 
-let liveFirebaseMembers = [];
+let globalActiveCloudForces = [];
 
-window.showView = function(viewId) {
-    document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active-view'));
-    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+// التنقل المبتكر الجديد بين القطاعات الكبرى
+window.switchSector = function(sectorId) {
+    document.querySelectorAll('.sector-view').forEach(v => v.classList.remove('active-view'));
+    document.querySelectorAll('.sector-btn').forEach(b => b.classList.remove('active-sector'));
     
-    document.getElementById('view-' + viewId).classList.add('active-view');
-    document.getElementById('nav-' + viewId).classList.add('active');
+    document.getElementById('sector-' + sectorId).classList.add('active-view');
+    document.getElementById('sect-btn-' + sectorId).classList.add('active-sector');
 };
 
-window.toggleForm = function(formId) {
-    const f = document.getElementById(formId);
-    f.style.display = f.style.display === 'none' ? 'block' : 'none';
+window.toggleElement = function(elementId) {
+    const el = document.getElementById(elementId);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
 };
 
-// 🗺️ فحص رادار الخرائط التفاعلي والمربعات الأمنية
-window.inspectGrid = function(gridId, infoText) {
-    const area = document.getElementById("gridReportArea");
-    area.style.display = "block";
-    area.innerHTML = `
-        <span style="color:var(--neon-red); font-weight:bold;">[📡 تقرير رادار السيطرة المربع ${gridId}]:</span><br>
-        الموقع الجغرافي: قطاع العمليات التكتيكي المشترك (${gridId})<br>
-        الحالة الحالية ورصد خلايا التهديد الجنائي: <span style="color:var(--gold);">${infoText}</span><br>
-        <span style="color:var(--neon-blue); font-size:11px;">تم التحديث تلقائياً بواسطة أنظمة الاستطلاع الرقمية المسيرة.</span>
+// تشغيل وتفقد نودات الرادار الجغرافي
+window.triggerNode = function(nodeName, description) {
+    const fb = document.getElementById("nodeFeedbackPanel");
+    fb.style.display = "block";
+    fb.innerHTML = `
+        <span style="color:var(--neon-cyan); font-weight:bold;">[📡 إشارة استطلاع القطاع ${nodeName}]:</span><br>
+        تفاصيل الرصد الرقمي: <span style="color:var(--gold);">${description}</span><br>
+        <span style="font-size:10px; color:var(--text-muted);">نظام مسح الإحداثيات النشط - متصل بالقمر الاصطناعي العسكري.</span>
     `;
 };
 
-// 🤖 محرك المعالجة والفرز الاستدلالي (المطور كلياً)
-window.executeConsoleCommand = function() {
-    const input = document.getElementById("consoleInput");
-    const cmd = input.value.trim().toLowerCase();
-    if(!cmd) return;
+// معالج القشرة الذكية والأوامر الحربية الاستدلالية
+window.processShellCommand = function() {
+    const input = document.getElementById("shellInputField");
+    const query = input.value.trim().toLowerCase();
+    if(!query) return;
 
-    const logsContainer = document.getElementById("consoleLogs");
-    
-    const userLine = document.createElement("div");
-    userLine.className = "log-line user-query";
-    userLine.innerText = `> ${input.value}`;
-    logsContainer.appendChild(userLine);
-    
+    const box = document.getElementById("shellOutputArea");
+    const uLine = document.createElement("div");
+    uLine.style.color = "var(--gold)";
+    uLine.innerText = `> ${input.value}`;
+    box.appendChild(uLine);
     input.value = "";
 
     setTimeout(() => {
-        const aiLine = document.createElement("div");
-        aiLine.className = "log-line result";
+        const rLine = document.createElement("div");
+        rLine.style.color = "#cbd5e1";
+        rLine.style.borderRight = "2px solid var(--neon-cyan)";
+        rLine.style.paddingRight = "10px";
         
-        let pool = [...staticForces, ...liveFirebaseMembers];
-        let reply = "";
+        let pool = [...staticRegistry, ...globalActiveCloudForces];
+        let res = "";
 
-        if(cmd.includes("member") || cmd.includes("رتبة ممبر") || cmd.includes("رتبه ممبر")) {
-            const matches = pool.filter(p => p.rank.toLowerCase().includes("member"));
-            reply = `[AI RESOLUTION] حصر الكوادر الميدانية برتبة ممبر:\n` + matches.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرقم: ${m.code} | فرقة: ${m.unit}`).join("\n");
-        } else if(cmd.includes("الفا") || cmd.includes("alpha")) {
-            const matches = pool.filter(p => p.unit.toLowerCase().includes("alpha"));
-            reply = `[AI RESOLUTION] حصر تشكيل فرقة الاقتحام [Alpha]:\n` + matches.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
-        } else if(cmd.includes("برافو") || cmd.includes("bravo")) {
-            const matches = pool.filter(p => p.unit.toLowerCase().includes("bravo"));
-            reply = `[AI RESOLUTION] حصر تشكيل فرقة الإسناد [Bravo]:\n` + matches.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
-        } else if(cmd.includes("كامل") || cmd.includes("القوة") || cmd.includes("سوات") || cmd.includes("swat")) {
-            reply = `[AI RESOLUTION] تقرير القوة الإجمالية الحالية المربوطة بسيرفر المزامنة:\n` + pool.map(m => `  [ID: ${m.code}] ${m.name} -> الرتبة: ${m.rank} | التمركز: ${m.unit}`).join("\n");
+        if(query.includes("member") || query.includes("ممبر")) {
+            const items = pool.filter(p => p.rank.toLowerCase().includes("member"));
+            res = `[CORTEX RESOLUTION] فرز رتبة ممبر الميدانيين:\n` + items.map((m, i) => `  ${i+1}. ${m.name} [ID: ${m.code}] -> فرقة: ${m.unit}`).join("\n");
+        } else if(query.includes("الفا") || query.includes("alpha")) {
+            const items = pool.filter(p => p.unit.toLowerCase().includes("alpha"));
+            res = `[CORTEX RESOLUTION] تشكيل قوة الاقتحام [Alpha]:\n` + items.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
+        } else if(query.includes("برافو") || query.includes("bravo")) {
+            const items = pool.filter(p => p.unit.toLowerCase().includes("bravo"));
+            res = `[CORTEX RESOLUTION] تشكيل قوة الإسناد [Bravo]:\n` + items.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
+        } else if(query.includes("كامل") || query.includes("القوة") || query.includes("swat")) {
+            res = `[CORTEX RESOLUTION] جرد كامل القوة المسجلة على الخوادم:\n` + pool.map(m => `  [ID: ${m.code}] ${m.name} -> ${m.rank} | ${m.unit}`).join("\n");
         } else {
-            reply = `[AI ERROR] الأمر غير مفهوم أمنياً. يرجى استخدام كلمات مفتاحية صريحة للفرز: (فرقة الفا، فرقة برافو، رتبة member، كامل القوة).`;
+            res = `[⚠️ شفرة غير معرفة] يرجى إدخال معيار دقيق للفرز مثل: (فرقة الفا، فرقة برافو، رتبة member، كامل القوة).`;
         }
 
-        aiLine.innerText = reply;
-        logsContainer.appendChild(aiLine);
-        logsContainer.scrollTop = logsContainer.scrollHeight;
-    }, 300);
+        rLine.innerText = res;
+        box.appendChild(rLine);
+        box.scrollTop = box.scrollHeight;
+    }, 250);
 };
 
-// 🤖 مولد العتاد والهندام التكتيكي (جديد وفخم)
-window.generateTacticalOutfitCode = function() {
-    const name = document.getElementById("outfitTargetName").value || "ضابط ميداني مجهول";
-    const rank = document.getElementById("outfitRankSelection").value;
-    const weapon = document.getElementById("outfitWeapon").value;
-    const vest = document.getElementById("outfitVest").value;
+// مولد بطاقات الهندام والتجهيز التكتيكي المطور
+window.buildTacticalBadge = function() {
+    const name = document.getElementById("logisticsName").value || "ضابط غير معرف";
+    const rank = document.getElementById("logisticsRank").value;
+    const weapon = document.getElementById("logisticsWeapon").value;
+    const armor = document.getElementById("logisticsArmor").value;
 
-    const placeholder = document.getElementById("outfitPlaceholderText");
-    const receipt = document.getElementById("printOutfitReceipt");
-
-    placeholder.style.display = "none";
-    receipt.style.display = "block";
-
-    receipt.innerHTML = `
-        <div style="border-bottom:1px dashed var(--gold); padding-bottom:10px; margin-bottom:15px; text-align:center;">
-            <h4 style="color:var(--gold);">وثيقة تسليح وتجهيز معتمدة</h4>
-            <span style="font-size:11px; color:var(--text-slate);">SERIAL: SEC-OUTFIT-${Math.floor(1000 + Math.random() * 9000)}</span>
+    document.getElementById("badgeFallbackText").style.display = "none";
+    const out = document.getElementById("badgePrintOutput");
+    out.style.display = "block";
+    out.innerHTML = `
+        <div style="border-bottom:1px dashed rgba(255,255,255,0.2); padding-bottom:8px; margin-bottom:12px; text-align:center;">
+            <span style="color:var(--gold); font-weight:bold; font-size:14px;">وثيقة التخصيص والعتاد اللوجستي</span><br>
+            <span style="font-size:10px; color:var(--text-muted);">ID-BARCODE: CTX-${Math.floor(2000 + Math.random() * 7000)}</span>
         </div>
-        <p><b>👤 الاسم المستهدف:</b> ${name}</p>
-        <p><b>🎖️ المستوى الرتبي:</b> ${rank}</p>
-        <p><b>🔫 السلاح الأساسي المعتمد:</b> ${weapon}</p>
-        <p><b>🛡️ نوع درع المقذوفات:</b> ${vest}</p>
-        <div style="margin-top:15px; background:white; color:black; padding:8px; text-align:center; font-weight:bold; letter-spacing:4px; font-size:12px;">
-            ||||| | |||| ||| || |||||| |
+        <div style="font-size:12.5px; line-height:1.8;">
+            <p><b>👤 المستهدف بالتعميد:</b> ${name}</p>
+            <p><b>🎖️ المستوى الرتبي:</b> ${rank}</p>
+            <p><b>🔫 السلاح التكتيكي:</b> ${weapon}</p>
+            <p><b>🛡️ درع المقذوفات:</b> ${armor}</p>
         </div>
-        <div style="font-size:10px; color:var(--neon-blue); text-align:center; margin-top:10px;">نظام التعميد الموحد - جاهز للطباعة والتنفيذ الميداني فوراً</div>
+        <div style="margin-top:15px; background:white; color:black; padding:6px; text-align:center; font-weight:bold; letter-spacing:5px; font-size:11px;">
+            |||| || ||||| ||| | ||| ||
+        </div>
+        <div style="font-size:10px; color:var(--neon-cyan); text-align:center; margin-top:8px;">موجّه لمهندس الملابس والتسليح الميداني فوراً</div>
     `;
 };
 
-// 🤖 توليد الخطط العسكرية التلقائية بالـ AI
-window.aiGenerateOpPlan = function() {
-    const title = document.getElementById("opTitle").value || "مداهمة مباغتة وعزل";
-    const leader = document.getElementById("opLeader").value || "قائد السيرفر المسؤول";
-
-    document.getElementById("opPlanDesc").value = `[محاكاة العقل التكتيكي AI]:\nتقرر تحرك أطقم القوة الضاربة بقيادة (${leader}) لإغلاق المخارج الطارئة للقطاع الجغرافي المستهدف في عملية (${title})، مع ضرورة إلقاء قنابل تشتيت الرؤية (Flashbangs) بالتزامن مع دخول وحدة الـ Members لتصفية زوايا الغرفة بدقة 100% وعزل خلية التهديد بالكامل.`;
+// توليد خطط المداهمات بالذكاء الاصطناعي
+window.generateAiTacticalPlan = function() {
+    const t = document.getElementById("missionTitle").value || "مداهمة مباغتة وعزل";
+    const l = document.getElementById("missionLeader").value || "قائد السيرفر المسؤول";
+    document.getElementById("missionDesc").value = `[العقل التكتيكي الشامل AI]:\nتقرر توجيه أطقم القوة الميدانية تحت إمرة القائد الميداني (${l}) لمحاصرة وتطويق المربع المستهدف ضمن خطة (${t}). يتم تفعيل الدخول المباغت بواسطة قنابل الصوت لوحدة الـ Members لتطهير الزوايا وتثبيت التهديد في زمن قياسي لا يتعدى 45 ثانية.`;
 };
 
-// 🔓 فك تشفير الخزنة الرئاسية الموحدة (الترشيحات والتقارير)
-window.unlockMasterVault = function() {
-    const pass = document.getElementById("vaultMasterKey").value;
-    if(pass === MASTER_PASSWORD) {
-        document.getElementById("vaultLockScreen").style.setProperty('display', 'none', 'important');
-        document.getElementById("vaultRealContent").style.setProperty('display', 'grid', 'important');
-        alert("🔓 تم التحقق من الكود الرقمي بنجاح. فك تشفير مستندات التقارير والترشيحات العليا.");
+// فك تشفير قطاع العمليات والملفات السوداء
+window.verifyCortexVault = function() {
+    const k = document.getElementById("cortexMasterKey").value;
+    if(k === AUTH_KEY) {
+        document.getElementById("vaultAuthenticationGate").style.setProperty('display', 'none', 'important');
+        document.getElementById("vaultCoreContent").style.setProperty('display', 'grid', 'important');
     } else {
-        alert("❌ رمز الولاء والعبور خاطئ! تم إلغاء تفعيل الوصول للأرشيف الأسود.");
+        alert("❌ الرمز المدخل غير صحيح! تم تجميد الوصول لقطاع الملفات السوداء.");
     }
 };
 
-// ================= عمليات المزامنة الحية عبر قاعدة خوادم Firebase =================
+// ================= نظام المزامنة اللحظية الشامل عبر خوادم Firebase =================
 
-// 1. مزامنة القوة البشرية
-document.getElementById("btnSaveMember").addEventListener("click", async () => {
-    const code = document.getElementById("fCode").value.trim();
-    const name = document.getElementById("fName").value.trim();
-    const rank = document.getElementById("fRank").value.trim();
-    const unit = document.getElementById("fUnit").value.trim();
+// 1. معالجة سحب ورفع القوة البشرية
+document.getElementById("btnUploadMember").addEventListener("click", async () => {
+    const code = document.getElementById("memberCode").value.trim();
+    const name = document.getElementById("memberName").value.trim();
+    const rank = document.getElementById("memberRank").value.trim();
+    const unit = document.getElementById("memberUnit").value.trim();
 
-    if(!code || !name || !rank || !unit) { alert("أكمل حقول الضابط أولاً!"); return; }
-
+    if(!code || !name || !rank || !unit) { alert("يرجى تعبئة كافة حقول الكادر العسكري!"); return; }
     try {
         await addDoc(collection(db, "members"), { code, name, rank, unit, timestamp: Date.now() });
-        alert("✅ تم رفع الكادر الجديد وتعميده سحابياً بنجاح.");
-        document.getElementById("forceAddForm").style.display = "none";
-        document.getElementById("fCode").value = ""; document.getElementById("fName").value = "";
-        document.getElementById("fRank").value = ""; document.getElementById("fUnit").value = "";
-    } catch(e) { alert("خطأ في الخادم السحابي: " + e); }
+        alert("✅ تم تعميد وحفظ الكادر بالسيرفر السحابي.");
+        document.getElementById("registrationFormZone").style.display = "none";
+        document.getElementById("memberCode").value = ""; document.getElementById("memberName").value = "";
+        document.getElementById("memberRank").value = ""; document.getElementById("memberUnit").value = "";
+    } catch(e) { alert("خطأ في الاتصال بالسيرفر: " + e); }
 });
 
-onSnapshot(collection(db, "members"), (snapshot) => {
-    const tbody = document.getElementById("dynamicMembersList");
-    tbody.innerHTML = "";
-    liveFirebaseMembers = [];
-    snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        liveFirebaseMembers.push(data);
+onSnapshot(collection(db, "members"), (snap) => {
+    const target = document.getElementById("cloudMembersRows");
+    target.innerHTML = "";
+    globalActiveCloudForces = [];
+    snap.forEach(docSnap => {
+        const d = docSnap.data();
+        globalActiveCloudForces.push(d);
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${data.code}</td>
-            <td>${data.name}</td>
-            <td>${data.rank}</td>
-            <td>${data.unit}</td>
-            <td><button class="cyber-btn danger" style="padding:3px 8px; font-size:11px;" onclick="deleteCloudRecord('members', '${docSnap.id}')">حذف</button></td>
+            <td>${d.code}</td>
+            <td>${d.name}</td>
+            <td>${d.rank}</td>
+            <td>${d.unit}</td>
+            <td><button class="cortex-btn btn-danger" style="padding:2px 6px; font-size:11px;" onclick="wipeCloudDocument('members', '${docSnap.id}')">شطب</button></td>
         `;
-        tbody.appendChild(tr);
+        target.appendChild(tr);
     });
 });
 
-// 2. مزامنة الخطط والمداهمات التكتيكية
-document.getElementById("btnSaveOp").addEventListener("click", async () => {
-    const title = document.getElementById("opTitle").value.trim();
-    const leader = document.getElementById("opLeader").value.trim();
-    const risk = document.getElementById("opRiskLevel").value;
-    const desc = document.getElementById("opPlanDesc").value.trim();
+// 2. معالجة سحب وبث خطط المداهمات الأمنية
+document.getElementById("btnUploadMission").addEventListener("click", async () => {
+    const title = document.getElementById("missionTitle").value.trim();
+    const leader = document.getElementById("missionLeader").value.trim();
+    const risk = document.getElementById("missionRisk").value;
+    const desc = document.getElementById("missionDesc").value.trim();
 
-    if(!title || !leader || !desc) { alert("أدخل تفاصيل ومحاور الخطة الميدانية!"); return; }
-
+    if(!title || !leader || !desc) { alert("يرجى إدخال معطيات الخطة الميدانية!"); return; }
     try {
         await addDoc(collection(db, "missions"), { title, leader, risk, desc, timestamp: Date.now() });
-        alert("🛰️ تم بث برقية المداهمة وحفظها بملفات العمليات المشتركة الحية.");
-        document.getElementById("opTitle").value = ""; document.getElementById("opLeader").value = ""; document.getElementById("opPlanDesc").value = "";
+        alert("🛰️ تم بث التعميم الميداني بنجاح لجميع الأطقم.");
+        document.getElementById("missionTitle").value = ""; document.getElementById("missionLeader").value = ""; document.getElementById("missionDesc").value = "";
     } catch(e) { alert(e); }
 });
 
-onSnapshot(collection(db, "missions"), (snapshot) => {
-    const container = document.getElementById("opsRealtimeContainer");
-    container.innerHTML = "";
-    snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "tactical-card";
-        card.innerHTML = `
-            <h4 style="color:var(--neon-blue); font-size:14px; margin-bottom:5px;">🎯 خطة عملية: ${data.title}</h4>
-            <p style="font-size:12.5px; margin:3px 0;"><b>👮 القائد المسؤول:</b> ${data.leader} | <b>⚠️ مستوى الخطورة:</b> <span style="color:var(--neon-red);">${data.risk}</span></p>
-            <p style="background:#02050b; padding:8px; border-radius:4px; margin-top:6px; font-size:12.5px; color:#cbd5e1; border:1px solid rgba(0,240,255,0.05);">${data.desc}</p>
-            <button class="cyber-btn danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:8px;" onclick="deleteCloudRecord('missions', '${docSnap.id}')">شطب وإغلاق الملف</button>
+onSnapshot(collection(db, "missions"), (snap) => {
+    const box = document.getElementById("missionsLiveBox");
+    box.innerHTML = "";
+    snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const node = document.createElement("div");
+        node.className = "op-card-node";
+        node.innerHTML = `
+            <h4 style="color:var(--neon-cyan); font-size:13.5px;">🎯 تعميم عملية: ${d.title}</h4>
+            <p style="font-size:12px; margin:4px 0;"><b>القائد الميداني:</b> ${d.leader} | <b>الخطورة:</b> <span style="color:var(--neon-danger);">${d.risk}</span></p>
+            <p style="background:rgba(0,0,0,0.3); padding:8px; border-radius:4px; font-size:12px; color:#cbd5e1; margin-top:5px; border:1px solid rgba(255,255,255,0.02);">${d.desc}</p>
+            <button class="cortex-btn btn-danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:8px;" onclick="wipeCloudDocument('missions', '${docSnap.id}')">إغلاق وتصفية الملف</button>
         `;
-        container.appendChild(card);
+        box.appendChild(node);
     });
 });
 
-// 3. سحب وعرض التقارير والترشيحات السحابية داخل الخزنة المشفرة
-onSnapshot(collection(db, "reports"), (snapshot) => {
-    const container = document.getElementById("vaultReportsContainer");
-    container.innerHTML = "";
-    snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "tactical-card";
-        card.style.borderRightColor = "var(--neon-red)";
-        card.innerHTML = `
-            <h5 style="color:var(--neon-red);">📄 تقرير رقم: ${data.repId || 'M-CONF'}</h5>
-            <p style="font-size:12px; margin:4px 0;"><b>المسؤول:</b> ${data.leader} | <b>الموقع:</b> ${data.loc || 'غير محدد'}</p>
-            <p style="font-size:12px; background:#010307; padding:6px; color:#cbd5e1;">${data.details}</p>
-            <button class="cyber-btn danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:5px;" onclick="deleteCloudRecord('reports', '${docSnap.id}')">إتلاف نهائي</button>
+// 3. مزامنة وعرض التقارير والترشيحات داخل قطاع الملفات السوداء
+onSnapshot(collection(db, "reports"), (snap) => {
+    const box = document.getElementById("reportsLiveBox");
+    box.innerHTML = "";
+    snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const node = document.createElement("div");
+        node.className = "op-card-node";
+        node.style.borderRightColor = "var(--neon-danger)";
+        node.innerHTML = `
+            <h5 style="color:var(--neon-danger);">📄 محضر سري رقم: ${d.repId || 'CONF-N'}</h5>
+            <p style="font-size:12px; margin:3px 0;"><b>المسؤول:</b> ${d.leader} | <b>الموقع:</b> ${d.loc || 'غير محدد'}</p>
+            <p style="font-size:12px; color:#e2e8f0; background:rgba(0,0,0,0.2); padding:6px;">${d.details}</p>
+            <button class="cortex-btn btn-danger" style="padding:2px 6px; font-size:11px; width:auto; margin-top:5px;" onclick="wipeCloudDocument('reports', '${docSnap.id}')">إتلاف مستندي</button>
         `;
-        container.appendChild(card);
+        box.appendChild(node);
     });
 });
 
-onSnapshot(collection(db, "nominations"), (snapshot) => {
-    const container = document.getElementById("vaultNominationsContainer");
-    container.innerHTML = "";
-    snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "tactical-card";
-        card.style.borderRightColor = "var(--gold)";
-        card.innerHTML = `
-            <h5 style="color:var(--gold);">🎖️ مرشح للتزكية: ${data.name}</h5>
-            <p style="font-size:12px; margin:3px 0;"><b>المرتبة الحالية:</b> ${data.currentRank} | <b>الوحدة:</b> ${data.sector || 'SWAT'}</p>
-            <p style="font-size:12px; color:#a0aec0;">${data.reason}</p>
-            <button class="cyber-btn danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:5px;" onclick="deleteCloudRecord('nominations', '${docSnap.id}')">أرشفة وإلغاء</button>
+onSnapshot(collection(db, "nominations"), (snap) => {
+    const box = document.getElementById("nominationsLiveBox");
+    box.innerHTML = "";
+    snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const node = document.createElement("div");
+        node.className = "op-card-node";
+        node.style.borderRightColor = "var(--gold)";
+        node.innerHTML = `
+            <h5 style="color:var(--gold);">🎖️ ترشيح معتمد للـ الفرد: ${d.name}</h5>
+            <p style="font-size:12px; margin:3px 0;"><b>الرتبة الحالية:</b> ${d.currentRank} | <b>القطاع:</b> ${d.sector || 'SWAT'}</p>
+            <p style="font-size:12px; color:#94a3b8;">${d.reason}</p>
+            <button class="cortex-btn btn-danger" style="padding:2px 6px; font-size:11px; width:auto; margin-top:5px;" onclick="wipeCloudDocument('nominations', '${docSnap.id}')">سحب التزكية</button>
         `;
-        container.appendChild(card);
+        box.appendChild(node);
     });
 });
 
-// دالة الحذف الموحدة للسجلات السحابية
-window.deleteCloudRecord = async function(coll, docId) {
-    if(confirm("⚠️ تنبيه أمني: هل أنت متأكد من رغبتك في مسح هذا الملف وإتلاف أحرازه نهائياً من سيرفر Firebase؟")) {
+// الإجراء الموحد لإتلاف وشطب الوثائق من خوادم الـ Firebase
+window.wipeCloudDocument = async function(collectionName, documentId) {
+    if(confirm("⚠️ تحذير أمني: هل أنت متأكد من تدمير هذا الملف وحذفه نهائياً من خوادم النظام؟")) {
         try {
-            await deleteDoc(doc(db, coll, docId));
-            alert("🗑️ تم مسح السجل وتحديث السيرفر المركزي بنجاح.");
-        } catch(e) { alert("فشل الإجراء: " + e); }
+            await deleteDoc(doc(db, collectionName, documentId));
+            alert("🗑️ تم شطب المستند وتحديث المصفوفة السحابية بنجاح.");
+        } catch(e) { alert("فشلت عملية الحذف: " + e); }
     }
 };
 
