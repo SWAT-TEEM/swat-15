@@ -3,112 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نظام الاستخبارات التكتيكي الموحد - اسألني AI</title>
+<title>منظومة الإسقاط والسيطرة التكتيكية المشتركة - C4I CYBER SYTEM</title>
 
 <style>
 :root {
-    --bg-dark: #05080c;
-    --panel-bg: #0b1118;
-    --border-color: #1e293b;
-    --gold: #d8c27a;
-    --gold-hover: #f1dc99;
-    --text-main: #f1f5f9;
-    --text-muted: #64748b;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --info: #3b82f6;
-    --ai-blue: #00e5ff;
+    --cyber-bg: #020408;
+    --card-gradient: linear-gradient(145deg, #070d19 0%, #030710 100%);
+    --neon-blue: #00f0ff;
+    --neon-green: #39ff14;
+    --neon-red: #ff3131;
+    --gold: #e5c158;
+    --border-glow: #112240;
+    --text-white: #f1f5f9;
+    --text-slate: #8892b0;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
+    background-color: var(--cyber-bg);
+    color: var(--text-white);
     display: flex;
     height: 100vh;
     overflow: hidden;
     background-image: 
-        radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.03) 0%, transparent 80%),
-        linear-gradient(rgba(255,255,255,.005) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.005) 1px,transparent 1px);
-    background-size: 100% 100%, 25px 25px, 25px 25px;
+        radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.04) 0%, transparent 60%),
+        linear-gradient(rgba(0, 240, 255, 0.003) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.003) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
 }
 
-/* الشريط الجانبي التكتيكي */
+/* القائمة الجانبية الفخمة */
 .sidebar {
-    width: 280px;
-    background: var(--panel-bg);
-    border-left: 1px solid var(--border-color);
+    width: 290px;
+    background: #030712;
+    border-left: 2px solid var(--border-glow);
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    z-index: 10;
-    overflow-y: auto;
+    padding: 25px 15px;
+    box-shadow: 5px 0 30px rgba(0,0,0,0.7);
 }
 
-.logo-area {
+.system-branding {
     text-align: center;
-    padding: 15px 0;
-    border-bottom: 1px dashed var(--border-color);
-    margin-bottom: 20px;
+    padding-bottom: 25px;
+    border-bottom: 1px double var(--neon-blue);
+    margin-bottom: 25px;
 }
 
-.logo-icon {
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle, #10172a 40%, #020617 100%);
-    border: 2px solid var(--ai-blue);
+.radar-logo {
+    width: 80px;
+    height: 80px;
+    border: 2px dashed var(--neon-blue);
     border-radius: 50%;
-    margin: 0 auto 10px;
+    margin: 0 auto 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
-    font-size: 28px;
+    font-size: 32px;
+    position: relative;
+    animation: spinRadar 6s linear infinite;
 }
+@keyframes spinRadar { 100% { transform: rotate(360deg); } }
 
-.logo-text {
-    color: var(--ai-blue);
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+.radar-logo::after {
+    content: ''; position: absolute; width: 100%; height: 100%;
+    border-radius: 50%; border: 1px solid var(--neon-green); opacity: 0.4;
+    animation: pulseGlow 2s infinite;
 }
+@keyframes pulseGlow { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.2); opacity: 0; } }
 
-.nav-btn {
+.nav-item {
     width: 100%;
-    padding: 12px 15px;
-    margin: 4px 0;
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    color: var(--text-main);
+    padding: 14px 18px;
+    margin: 6px 0;
+    background: rgba(17, 34, 64, 0.2);
+    border: 1px solid rgba(0, 240, 255, 0.05);
+    border-radius: 6px;
+    color: var(--text-slate);
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: right;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 12px;
-    transition: all 0.2s ease;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-btn:hover, .nav-btn.active {
-    background: #0f172a;
-    border-color: var(--border-color);
-    color: var(--ai-blue);
-    box-shadow: inset 4px 0 0 var(--ai-blue);
+.nav-item:hover, .nav-item.active {
+    background: linear-gradient(90deg, rgba(0,240,255,0.1) 0%, rgba(3,7,18,0.2) 100%);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0,240,255,0.4);
+    transform: translateX(-5px);
 }
 
-/* واجهة العرض الرئيسية */
-.main-content {
+/* مساحة العرض المركزية */
+.workspace {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -116,390 +108,238 @@ body {
     padding: 30px;
 }
 
-.top-bar {
+.header-panel {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-glow);
+    margin-bottom: 30px;
 }
 
-.system-status {
+.status-tag {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--success);
-    background: rgba(16, 185, 129, 0.08);
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(16, 185, 129, 0.15);
+    gap: 10px;
+    background: rgba(57, 255, 20, 0.06);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    letter-spacing: 1px;
 }
 
-.pulse {
-    width: 8px;
-    height: 8px;
-    background: var(--success);
-    border-radius: 50%;
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-.page {
-    display: none !important; 
-}
-
-.page.active { 
-    display: block !important; 
-    animation: fadeInUp 0.35s ease forwards;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.dashboard-layout {
+.cyber-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 30px;
 }
+@media(max-width: 1150px) { .cyber-grid { grid-template-columns: 1fr; } }
 
-@media(max-width: 1024px) { .dashboard-layout { grid-template-columns: 1fr; } }
-
-.card-panel {
-    background: var(--panel-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.panel-title {
-    font-size: 17px;
-    color: var(--gold);
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* الشات والمحرك الذكي */
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 400px;
-    background: #04070a;
-    border: 1px solid var(--border-color);
+.cyber-panel {
+    background: var(--card-gradient);
+    border: 1px solid var(--border-glow);
     border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    position: relative;
     overflow: hidden;
 }
 
-.chat-messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
+.cyber-panel::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+}
+
+.panel-head {
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(136, 146, 176, 0.1);
+    padding-bottom: 12px;
 }
 
-.msg {
-    max-width: 85%;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 13.5px;
-    line-height: 1.6;
-    white-space: pre-line;
-}
-
-.msg.ai {
-    background: #0f172a;
-    color: var(--text-main);
-    align-self: flex-start;
-    border-right: 3px solid var(--ai-blue);
-}
-
-.msg.user {
-    background: var(--ai-blue);
-    color: #000;
-    font-weight: 600;
-    align-self: flex-end;
-}
-
-.chat-input-area {
-    display: flex;
-    padding: 10px;
-    background: var(--panel-bg);
-    border-top: 1px solid var(--border-color);
-    gap: 10px;
-}
-
-.chat-input-area input { margin-bottom: 0; flex: 1; }
-.chat-input-area button { width: auto; padding: 0 20px; }
-
-/* الإحصائيات التكتيكية */
-.stats-container {
+/* رادار الخريطة التكتيكي التفاعلي */
+.tactical-grid-map {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-top: 5px;
-    grid-column: span 2;
-}
-@media(max-width: 1200px) { .stats-container { grid-template-columns: repeat(2, 1fr); } }
-@media(max-width: 600px) { .stats-container { grid-template-columns: 1fr; } }
-
-.stat-card {
-    background: #0d1520;
-    border: 1px solid var(--border-color);
-    padding: 18px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-}
-.stat-card .num { font-size: 24px; font-weight: bold; color: var(--gold); margin-bottom: 4px; }
-.stat-card .label { font-size: 12px; color: var(--text-muted); }
-
-/* مدخلات ومكونات عامة */
-input, select, textarea {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 12px;
-    background: #070b10;
-    border: 1px solid var(--border-color);
+    gap: 12px;
+    background: #02050b;
+    padding: 15px;
+    border: 1px dashed var(--neon-blue);
     border-radius: 6px;
-    color: white;
-    font-size: 13.5px;
-    transition: all 0.25s;
 }
 
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--ai-blue);
-    box-shadow: 0 0 8px rgba(0, 229, 255, 0.15);
-}
-
-.action-btn {
-    width: 100%;
-    padding: 11px;
-    background: linear-gradient(135deg, #0f172a 0%, #070a12 100%);
-    border: 1px solid var(--gold);
-    border-radius: 6px;
-    color: var(--gold);
-    font-weight: bold;
-    font-size: 13.5px;
+.grid-cell {
+    background: rgba(17, 34, 64, 0.4);
+    border: 1px solid rgba(0, 240, 255, 0.1);
+    height: 90px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.2s;
+    position: relative;
 }
-
-.action-btn:hover {
-    background: var(--gold);
-    color: #000;
-    box-shadow: 0 0 12px rgba(216, 194, 122, 0.25);
+.grid-cell:hover {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: var(--neon-blue);
 }
+.grid-cell .cell-id { font-size: 11px; color: var(--text-slate); position: absolute; top: 5px; right: 8px; font-family: monospace; }
+.grid-cell .cell-status { font-size: 12px; font-weight: bold; margin-top: 10px; }
+.grid-cell.compromised { border-color: var(--neon-red); background: rgba(255, 49, 49, 0.05); }
+.grid-cell.compromised .cell-status { color: var(--neon-red); animation: pulseText 1.5s infinite; }
 
-.ai-btn {
-    background: rgba(0, 229, 255, 0.06);
-    border: 1px solid var(--ai-blue);
-    color: var(--ai-blue);
-    margin-bottom: 12px;
+@keyframes pulseText { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+/* محرك الشات الاستدلالي الحربي */
+.console-box {
+    display: flex;
+    flex-direction: column;
+    height: 380px;
+    background: #010307;
+    border: 1px solid var(--border-glow);
+    border-radius: 6px;
 }
-.ai-btn:hover {
-    background: var(--ai-blue);
-    color: #000;
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+.console-logs { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+.log-line { font-size: 13.5px; line-height: 1.6; font-family: monospace; }
+.log-line.system { color: var(--neon-blue); }
+.log-line.user-query { color: var(--gold); }
+.log-line.result { color: #cbd5e1; padding-right: 15px; border-right: 2px solid var(--neon-green); }
+
+.console-input-group { display: flex; background: #040812; border-top: 1px solid var(--border-glow); padding: 8px; }
+.console-input-group input { background: transparent; border: none; color: white; padding: 10px; flex: 1; font-family: monospace; }
+.console-input-group input:focus { outline: none; }
+
+/* عناصر المدخلات والفخامة */
+input, select, textarea {
+    width: 100%; padding: 13px 16px; margin-bottom: 15px;
+    background: #040814; border: 1px solid var(--border-glow);
+    border-radius: 4px; color: white; font-size: 13.5px; transition: all 0.3s;
 }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0,240,255,0.2); }
 
-.add-member-btn {
-    background: var(--gold); color: #000; border: none;
-    width: 30px; height: 30px; border-radius: 6px;
-    font-size: 18px; font-weight: bold; cursor: pointer;
-    display: flex; justify-content: center; align-items: center;
+.cyber-btn {
+    width: 100%; padding: 13px; background: transparent;
+    border: 1px solid var(--neon-blue); color: var(--neon-blue);
+    font-weight: bold; font-size: 13.5px; cursor: pointer; border-radius: 4px;
+    transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;
 }
+.cyber-btn:hover { background: var(--neon-blue); color: black; box-shadow: 0 0 15px rgba(0,240,255,0.4); }
 
-.data-list-container { max-height: 350px; overflow-y: auto; padding-right: 2px; }
+.cyber-btn.danger { border-color: var(--neon-red); color: var(--neon-red); }
+.cyber-btn.danger:hover { background: var(--neon-red); color: white; box-shadow: 0 0 15px rgba(255,49,49,0.4); }
 
-.item-card {
-    background: #070b10; border: 1px solid var(--border-color);
-    border-radius: 8px; padding: 14px; margin-bottom: 12px;
-    border-right: 3px solid var(--info);
+.cyber-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: monospace; }
+.cyber-table th { background: #050b14; color: var(--gold); padding: 14px; text-align: right; border: 1px solid var(--border-glow); font-size: 13px; }
+.cyber-table td { padding: 12px 14px; border: 1px solid var(--border-glow); font-size: 13px; color: #cbd5e1; }
+
+.secure-lock-gate { max-width: 450px; margin: 60px auto; text-align: center; padding: 35px; border: 1px solid var(--neon-red); background: rgba(255,49,49,0.02); border-radius: 6px; box-shadow: 0 0 25px rgba(255,49,49,0.05); }
+
+.data-view-scroll { max-height: 400px; overflow-y: auto; }
+.tactical-card { background: #040814; border: 1px solid var(--border-glow); padding: 15px; border-radius: 6px; margin-bottom: 15px; border-right: 4px solid var(--neon-blue); }
+
+.page-view { display: none !important; }
+.page-view.active-view { display: block !important; animation: scanline 0.4s ease-out; }
+
+@keyframes scanline { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* لوحة استعراض الملابس المطبوعة الفخمة */
+#printOutfitReceipt {
+    background: #030710; border: 1px double var(--gold); padding: 20px; border-radius: 6px; margin-top: 20px; font-family: monospace; display: none;
 }
-.item-card h4 { color: var(--gold); font-size: 14px; margin-bottom: 6px; }
-.item-card p { font-size: 13px; color: #cbd5e1; margin: 4px 0; }
-.item-card .meta { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
-
-.lock-screen { max-width: 420px; margin: 40px auto; text-align: center; padding: 30px; }
-
-.swat-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-.swat-table th { background: #0f172a; color: var(--gold); padding: 12px; text-align: right; font-size: 13.5px; border: 1px solid var(--border-color); }
-.swat-table td { padding: 12px; border: 1px solid var(--border-color); font-size: 13.5px; }
-
-.shaar-box {
-    text-align: center; margin-top: 25px; padding: 15px;
-    border-top: 1px solid var(--border-color); color: var(--gold); font-weight: bold; letter-spacing: 1px;
-}
-
-.inline-lock-box {
-    background: #180f0f; border: 1px dashed var(--danger);
-    padding: 15px; border-radius: 6px; margin-bottom: 15px;
-}
-.inline-lock-box h5 { color: var(--danger); margin-bottom: 10px; font-size: 13px; }
-.flex-inputs { display: flex; gap: 10px; }
-.flex-inputs input { margin-bottom: 0; }
-.flex-inputs button { width: auto; white-space: nowrap; }
-
-.delete-table-btn {
-    background: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger);
-    color: var(--danger); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;
-}
-.delete-table-btn:hover { background: var(--danger); color: white; }
 </style>
 </head>
 <body>
 
-    <!-- 📋 الشريط الجانبي التكتيكي -->
+    <!-- 📲 قائمة السيطرة الجانبية المستقبلية -->
     <div class="sidebar">
-        <div class="logo-area">
-            <div class="logo-icon">🦅</div>
-            <div class="logo-text">اسألني C2</div>
+        <div class="system-branding">
+            <div class="radar-logo">📡</div>
+            <div class="logo-text" style="color: var(--neon-blue); font-weight: 900; font-size: 19px; letter-spacing: 1px;">A.I.S.O MISSION</div>
+            <div style="font-size: 10px; color: var(--text-slate); margin-top: 5px;">TACTICAL C4I PLATFORM</div>
         </div>
-        <button id="btn-dashboardPanel" class="nav-btn active" onclick="switchPage('dashboardPanel')">🖥️ لوحة القيادة و الـ AI</button>
-        <button id="btn-rulesPanel" class="nav-btn" onclick="switchPage('rulesPanel')">📜 اللائحة التنظيمية</button>
-        <button id="btn-clothingPanel" class="nav-btn" onclick="switchPage('clothingPanel')">👕 كود التجهيز والعتاد</button>
-        <button id="btn-schedulePanel" class="nav-btn" onclick="switchPage('schedulePanel')">📅 كشف مرتبات القوة</button>
-        <button id="btn-wantedGate" class="nav-btn" onclick="switchPage('wantedGate')">🚨 مراقبة المطلوبين</button>
-        <button id="btn-missionsPanel" class="nav-btn" onclick="switchPage('missionsPanel')">🎯 أرشيف المداهمات</button>
-        <button id="btn-nominationsPanel" class="nav-btn" onclick="switchPage('nominationsPanel')">🎖️ الترشيحات والترقيات</button>
-        <button id="btn-reportsPanel" class="nav-btn" onclick="switchPage('reportsPanel')">📄 خزانة التقارير السرية</button>
+        <button id="nav-hub" class="nav-item active" onclick="showView('hub')">🖥️ مركز القيادة والرادار</button>
+        <button id="nav-forces" class="nav-item" onclick="showView('forces')">👥 شجرة توزيع القوة</button>
+        <button id="nav-outfit" class="nav-item" onclick="showView('outfit')">⚙️ مهندس العتاد والتجهيز</button>
+        <button id="nav-ops" class="nav-item" onclick="showView('ops')">🎯 إدارة المداهمات الفورية</button>
+        <button id="nav-vault" class="nav-item" onclick="showView('vault')">🔒 الأرشيف الأسود المشفر</button>
     </div>
 
-    <!-- 🖥️ مساحة العرض الرئيسية -->
-    <div class="main-content">
-        <div class="top-bar">
-            <h2 id="pageTitle" style="font-size: 20px;">المنظومة الرقمية للذكاء الاصطناعي التكتيكي الموحد</h2>
-            <div class="system-status">
-                <div class="pulse"></div> الاتصال التكتيكي المشفر مستقر ومؤمن بالكامل
-            </div>
+    <!-- 🖥️ مساحة العمل والمعالجة -->
+    <div class="workspace">
+        <div class="header-panel">
+            <h2 style="font-size: 22px; font-weight: 800; letter-spacing: 1px;">منظومة السيطرة التكتيكية الموحدة</h2>
+            <div class="status-tag"><span style="width:7px; height:7px; background:var(--neon-green); border-radius:50%;"></span> ENCRYPTION LEVEL: SECURE SHA-256</div>
         </div>
 
-        <!-- ================= 1. لوحة القيادة مع الذكاء الاصطناعي ================= -->
-        <div id="dashboardPanel" class="page active">
-            <div class="dashboard-layout">
-                <div class="card-panel">
-                    <h3 class="panel-title" style="color: var(--ai-blue);">🤖 المحرك التكتيكي الاستدلالي (فرز وتصنيف الأطقم والأسماء)</h3>
-                    <div class="chat-container">
-                        <div class="chat-messages" id="chatMessages">
-                            <div class="msg ai">تحية عسكرية سيادة القائد. تم تفعيل نظام الاستعلام البنيوي الفوري.
+        <!-- ================= 1. مركز القيادة والرادار التفاعلي ================= -->
+        <div id="view-hub" class="page-view active-view">
+            <div class="cyber-grid">
+                <div class="cyber-panel">
+                    <div class="panel-head">📡 رادار توزيع الهدف والمربعات الجغرافية الحية</div>
+                    <p style="color: var(--text-slate); font-size: 13px; margin-bottom: 15px;">اضغط على المربع الأمني المصاب باللون الأحمر لعرض إحداثيات الهدف الجنائي ونوع التهديد المكتشف فوراً.</p>
+                    <div class="tactical-grid-map">
+                        <div class="grid-cell" onclick="inspectGrid('Alpha-1', 'آمن')"><span class="cell-id">A-1</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+                        <div class="grid-cell compromised" onclick="inspectGrid('Alpha-2', 'خلية مشبوهة - تجارة أسلحة غير قانونية')"><span class="cell-id">A-2</span><span class="cell-status">TARGET DETECTED</span></div>
+                        <div class="grid-cell" onclick="inspectGrid('Alpha-3', 'آمن')"><span class="cell-id">A-3</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+                        <div class="grid-cell" onclick="inspectGrid('Bravo-1', 'آمن')"><span class="cell-id">B-1</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+                        <div class="grid-cell" onclick="inspectGrid('Bravo-2', 'آمن')"><span class="cell-id">B-2</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+                        <div class="grid-cell" onclick="inspectGrid('Bravo-3', 'آمن')"><span class="cell-id">B-3</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+                        <div class="grid-cell compromised" onclick="inspectGrid('Charlie-1', 'تحصن مطلوب خطير صادر بحقه حكم فيدرالي')"><span class="cell-id">C-1</span><span class="cell-status">HOSTILE ZONE</span></div>
+                        <div class="grid-cell" onclick="inspectGrid('Charlie-2', 'آمن')"><span class="cell-id">C-2</span><span class="cell-status" style="color:var(--neon-green)">CLEAR</span></div>
+                    </div>
+                    <div id="gridReportArea" style="margin-top:15px; padding:12px; background:rgba(0,240,255,0.03); border:1px solid var(--border-glow); border-radius:4px; font-family:monospace; font-size:13px; display:none;"></div>
+                </div>
 
-يمكنكم توجيه الاستفسارات المباشرة مثل:
-- "اسماء رتبة member"
-- "اسماء فرقة الفا" أو "فرقة برافو"
-- "كشف القوة الكاملة"
-سأقوم بسحب ومعالجة البيانات من السيرفر وعرض الجداول فوراً.</div>
+                <div class="cyber-panel">
+                    <div class="panel-head" style="color: var(--neon-blue);">🤖 العقل التكتيكي الاستدلالي الحاصِر</div>
+                    <div class="console-box">
+                        <div class="console-logs" id="consoleLogs">
+                            <div class="log-line system">[SYSTEM AI] مرحباً بك سيادة القائد في واجهة التحليل الهيكلي الفوري. اكتب استعلامك لفرز القوة البشرية الحية والمزامنة فوراً بالسيرفر.</div>
                         </div>
-                        <div class="chat-input-area">
-                            <input id="chatInput" placeholder="اكتب أمر الاستعلام التكتيكي هنا..." autocomplete="off">
-                            <button class="action-btn" style="border-color: var(--ai-blue); color: var(--ai-blue);" onclick="sendChatMessage()">استعلام</button>
+                        <div class="console-input-group">
+                            <input id="consoleInput" placeholder="أدخل أمر الفرز (مثال: فرقة الفا، رتبة member، كامل القوة)..." autocomplete="off">
+                            <button class="cyber-btn" style="width:auto; padding:0 15px;" onclick="executeConsoleCommand()">معالجة</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-panel">
-                    <h3 class="panel-title">📡 برقيات القيادة والتعاميم الفورية</h3>
-                    <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 15px; font-size: 13.5px;">تم دمج معالجات تحليل المخاطر الجنائية والميدانية لإعطاء القوات المشتركة تقديرات استباقية قبل بدء الاقتحامات الحرجة.</p>
-                    <ul style="list-style: none; color: #cbd5e1; line-height: 2; font-size: 13px;">
-                        <li style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 8px;">
-                            <span style="color: var(--ai-blue); font-weight: bold;">[تتبع الأهداف]</span> الذكاء الاصطناعي يحلل حالياً المربعات الأمنية النشطة ويحدث خلايا التهديد تلقائياً.
-                        </li>
-                        <li style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 8px;">
-                            <span style="color: var(--gold); font-weight: bold;">[التشفير الفيدرالي]</span> بروتوكولات المزامنة تعمل بالكامل بمستوى تشفير عالي الكثافة SHA-256 عبر السيرفر.
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- إحصائيات الفرقة -->
-                <div class="stats-container">
-                    <div class="stat-card"><div class="num" id="statMembersCount">13</div><div class="label">إجمالي القوة البشرية المدرجة</div></div>
-                    <div class="stat-card"><div class="num" style="color: var(--warning);" id="statActiveUnits">Alpha / Bravo</div><div class="label">مجموعات المداهمة الجاهزة</div></div>
-                    <div class="stat-card"><div class="num" style="color: var(--ai-blue);">الوضعية الذكية</div><div class="label">تحليل السلوك الجنائي للخلية</div></div>
-                    <div class="stat-card"><div class="num" style="color: var(--danger);">LEVEL 1</div><div class="label">مستوى الاستعداد العملياتي الحالي</div></div>
-                </div>
             </div>
         </div>
 
-        <!-- ================= 2. اللائحة والقوانين ================= -->
-        <div id="rulesPanel" class="page">
-            <div class="card-panel">
-                <h3 class="panel-title">الميثاق التنظيمي واللوائح العسكرية الصارمة للمجموعة</h3>
-                <ol style="padding-right: 20px; line-height: 2.2; color: #cbd5e1; font-size: 14px;">
-                    <li><b>الامتثال الهيكلي الكامل:</b> الالتزام بالأوامر والتعليمات التكتيكية الصادرة من القيادة المشتركة دون إبطاء أو نقاش.</li>
-                    <li><b>أذونات التحرك والانتشار:</b> يُحظر خروج أي دوريات تفتيشية أو تخطيط لمداهمات ميدانية دون أمر عملياتي مباشر وموثق.</li>
-                    <li><b>الانضباط العملياتي:</b> الحفاظ على أعلى درجات الجدية العسكرية وتجنب الاتصالات الجانبية غير المصرح بها أثناء تنفيذ المهام السريعة.</li>
-                    <li><b>بروتوكول الهندام والمظهر:</b> التزام جميع أفراد الوحدات بالزي والمعدات الرسمية المصنفة والمعتمدة داخل النظام التكتيكي.</li>
-                    <li><b>حظر تسريب الأرشيف:</b> جميع الوثائق والتقارير الجنائية داخل النظام سرية للغاية؛ تداولها يعرض الحساب للإلغاء الفوري والمحاكمة الإدارية.</li>
-                    <li><b>التسلسل القيادي:</b> ترفع خطابات التظلم أو طلبات الدعم مرحلياً تبعا للتسلسل الرتبي للفرقة.</li>
-                    <li><b>تأمين ومراقبة العتاد:</b> يُمنع مشاركة أو تسليم الأسلحة والذخائر والمعدات الرسمية لكوادر خارج القوة الرسمية المعتمدة بالجدول.</li>
-                    <li style="color: #ff9800; font-weight: bold; background: rgba(216, 194, 122, 0.04); padding: 12px; border-radius: 6px; border-right: 4px solid var(--gold); margin-top: 12px;">[بند السيادة والشرعية التنظيمية العليا] قانون الولاء المطلق: تظل الصلاحيات والشرعية الإدارية كاملة بيد قائد الفرقة الحالي (Chief) فهد المطيري بشكل حصري، وفي حال رصد أي عصيان تنظيمي، يتم تفعيل العزل الرقمي وإبطال الصلاحيات فوراً.</li>
-                </ol>
-                <div class="shaar-box">⚔️ عقيدة القوة: الانضباط - السرية السرعة في التنفيذ ⚔️</div>
-            </div>
-        </div>
-
-        <!-- ================= 3. قائمة اللبس ================= -->
-        <div id="clothingPanel" class="page">
-            <div class="card-panel">
-                <h3 class="panel-title">👕 معايير العتاد وتجهيزات الميدان القياسية</h3>
-                <div style="line-height: 2; color: #cbd5e1; font-size: 14px;">
-                    <p style="margin-bottom: 12px; color: var(--gold); font-weight: bold;">⚠️ العتاد القتالي الموحد لكافة الوحدات:</p>
-                    <ul style="padding-right: 20px;">
-                        <li><b>الزي الأساسي:</b> البدلة التكتيكية السوداء الداكنة المضادة للشظايا مدمجة بحامل الصفائح التكتيكي.</li>
-                        <li><b>أنظمة الرأس:</b> خوذة العمليات المتقدمة مجهزة بقواعد نظارات الرؤية الليلية وأجهزة الاتصال اللاسلكي المشفر.</li>
-                        <li><b>التسليح المعتمد:</b> البندقية الهجومية الأساسية العالية الكثافة، المسدس التكتيكي عيار 9 ملم كمقذوف ثانوي، والقنابل الصوتية الدخانية للاقتحامات.</li>
-                    </ul>
+        <!-- ================= 2. شجرة وتوزيع القوة البشرية ================= -->
+        <div id="view-forces" class="page-view">
+            <div class="cyber-panel">
+                <div class="panel-head">
+                    <span>👥 شجرة الأطقم البشرية ومجموعات السوات المعتمدة</span>
+                    <button class="cyber-btn" style="width:auto; padding:5px 15px;" onclick="toggleForm('forceAddForm')">+ إضافة كادر</button>
                 </div>
-            </div>
-        </div>
 
-        <!-- ================= 4. جدول الأعضاء والقوة البشرية ================= -->
-        <div id="schedulePanel" class="page">
-            <div class="card-panel">
-                <div class="panel-title">
-                    <span>📅 قاعدة بيانات القوة البشرية ومجموعات الاقتحام المعينة</span>
-                    <button class="add-member-btn" onclick="showInlineLock('scheduleLock')">+</button>
-                </div>
-                
-                <div id="scheduleLock" class="inline-lock-box" style="display: none;">
-                    <h5>🔒 مدخل حماية - مطلوب رمز التحقق الرئاسي لتعديل جدول القوة</h5>
-                    <div class="flex-inputs">
-                        <input id="scheduleCodeInput" type="password" placeholder="أدخل رمز المرور الخاص بالإدارة" autocomplete="off">
-                        <button class="action-btn" onclick="verifyInlineCode('scheduleCodeInput', 'addMemberForm', 'scheduleLock')">تأكيد الهوية الرقمية</button>
+                <div id="forceAddForm" style="display:none; background:#040812; padding:20px; border-radius:6px; margin-bottom:20px; border:1px solid var(--neon-blue);">
+                    <h4 style="color: var(--neon-blue); margin-bottom:15px; font-size:14px;">📝 إدراج كادر جديد وتعميده بقاعدة البيانات السحابية</h4>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                        <input id="fCode" placeholder="الرقم التعريفي العسكري">
+                        <input id="fName" placeholder="الاسم الرباعي الكامل">
+                        <input id="fRank" placeholder="الرتبة التكتيكية المعينة">
+                        <input id="fUnit" placeholder="الوحدة القتالية (Alpha / Bravo)">
                     </div>
+                    <button class="cyber-btn" id="btnSaveMember">تثبيت وتعميد في خادم Firebase</button>
                 </div>
 
-                <div id="addMemberForm" style="display:none; background:#070b10; padding:20px; border-radius:8px; margin-bottom:15px; border:1px solid var(--ai-blue);">
-                    <h4 style="color:var(--ai-blue); margin-bottom:12px; font-size: 14px;">➕ إدراج كادر جديد بالقوة البشرية السحابية</h4>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom: 12px;">
-                        <input id="newMemNo" placeholder="الرقم التعريفي">
-                        <input id="newMemName" placeholder="الاسم الرباعي الكامل">
-                        <input id="newMemRank" placeholder="الرتبة التكتيكية">
-                        <input id="newMemUnit" placeholder="الوحدة / الفرقة">
-                    </div>
-                    <button class="action-btn" id="saveMemberBtn">حفظ وتعميد بالسيرفر السحابي</button>
-                </div>
-
-                <table class="swat-table">
+                <table class="cyber-table">
                     <thead>
-                        <tr><th>الرقم الأمني</th><th>الاسم الكامل للضابط</th><th>الرتبة العسكرية</th><th>الفرقة القتالية</th><th>الإجراء العملياتي</th></tr>
+                        <tr><th>المعرف المعياري</th><th>اسم الضابط التكتيكي</th><th>الرتبة العسكرية</th><th>الفرقة القتالية</th><th>صلاحية الشطب</th></tr>
                     </thead>
-                    <tbody id="staticMembersTable">
-                        <tr style="background: rgba(216, 194, 122, 0.03);"><td style="font-weight: bold; color: var(--gold);">01</td><td style="font-weight: bold;">FAHAD ALMUTAIRI</td><td style="color: var(--gold); font-weight: bold;">R-0 SWAT Chief</td><td style="font-weight: bold;">Command</td><td>-</td></tr>
-                        <tr><td>02</td><td>KARLOS ALMUTAIRI</td><td style="color: #cbd5e1;">R-1 Deputy Chief</td><td>Command</td><td>-</td></tr>
+                    <tbody id="staticMembersList">
+                        <tr style="background: rgba(229, 193, 88, 0.03); font-weight: bold;"><td style="color:var(--gold);">01</td><td>FAHAD ALMUTAIRI</td><td style="color:var(--gold);">R-0 SWAT Chief</td><td>Command</td><td>-</td></tr>
+                        <tr><td>02</td><td>KARLOS ALMUTAIRI</td><td>R-1 Deputy Chief</td><td>Command</td><td>-</td></tr>
                         <tr><td>03</td><td>Turki Al-Mutairi</td><td>R-2 Assistant Chief</td><td>Leader Alpha</td><td>-</td></tr>
                         <tr><td>04</td><td>James Morgan</td><td>R-3 Supervisor</td><td>Leader Bravo</td><td>-</td></tr>
                         <tr><td>05</td><td>Mov Marley</td><td>R-4 Member</td><td>Alpha</td><td>-</td></tr>
@@ -512,153 +352,89 @@ input:focus, select:focus, textarea:focus {
                         <tr><td>12</td><td>JOHN Marly</td><td>R-11 Member</td><td>Bravo</td><td>-</td></tr>
                         <tr><td>13</td><td>Ahmed Almutairi</td><td>R-12 Member</td><td>Bravo</td><td>-</td></tr>
                     </tbody>
-                    <tbody id="dynamicMembersTable"></tbody>
+                    <tbody id="dynamicMembersList"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- ================= 5. خلية المطلوبين ================= -->
-        <div id="wantedGate" class="page">
-            <div class="card-panel lock-screen" id="wantedLockPanel">
-                <h3>🔒 بوابة تتبع العناصر المطلوبة والتحري الجنائي</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin: 10px 0 20px;">الولوج يتطلب تشفير أمني خاص بالمستويات العليا للمنظومة</p>
-                <input id="wantedPass" type="password" placeholder="أدخل رمز فك التشفير المصنف" autocomplete="off">
-                <button class="action-btn" onclick="unlockSection('wantedPass', 'wantedRealPanel', 'wantedLockPanel')">فك تشفير الخلايا والدخول</button>
-            </div>
-            
-            <div id="wantedRealPanel" style="display:none;">
-                <div class="dashboard-layout">
-                    <div class="card-panel">
-                        <h3 class="panel-title">➕ تعميم وإدراج هدف جديد مطلوب أمنياً</h3>
-                        <input id="wantedName" placeholder="الاسم المستهدف للملاحقة" autocomplete="off">
-                        <input id="wantedCrime" placeholder="تصنيف الخطورة / نوع الجرم الجنائي" autocomplete="off">
-                        <button class="action-btn" id="addWanted">إرسال البرقية للمجموعات الميدانية فورا</button>
-                    </div>
-                    <div class="card-panel">
-                        <h3 class="panel-title" style="color: var(--danger);">🚨 خلايا التهديد والعناصر المطلوبة قيد الملاحقة</h3>
-                        <div id="wantedList" class="data-list-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= 6. إدارة المداهمات والعمليات ================= -->
-        <div id="missionsPanel" class="page">
-            <div class="dashboard-layout">
-                <div class="card-panel">
-                    <h3 class="panel-title">🎯 تخطيط وتنسيق المداهمات العملياتية</h3>
-                    <input id="missionTitle" placeholder="المعرف والاسم الرمزي للمهمة" autocomplete="off">
-                    <input id="missionLeader" placeholder="👮 الضابط الميداني المسؤول" autocomplete="off">
-                    <input id="missionMembers" placeholder="👥 أطقم وقوات الدعم والإسناد" autocomplete="off">
-                    <select id="missionStatus">
-                        <option value="مستمرة">⏳ خطة عملياتية قيد التنفيذ حالياً</option>
-                        <option value="ناجحة">✅ تم السيطرة وتحييد الهدف بنجاح</option>
-                        <option value="فاشلة">❌ مهمة مجهضة / تراجع تكتيكي</option>
+        <!-- ================= 3. مهندس العتاد والتجهيز التفاعلي ================= -->
+        <div id="view-outfit" class="page-view">
+            <div class="cyber-grid">
+                <div class="cyber-panel">
+                    <div class="panel-head">⚙️ مهندس ومولد مواصفات تسليح وعتاد الأطقم</div>
+                    <input id="outfitTargetName" placeholder="اسم الضابط المراد تجهيزه">
+                    <select id="outfitRankSelection">
+                        <option value="القيادة العليا (Chief / Deputy)">القيادة العليا (Chief / Deputy)</option>
+                        <option value="المشرفين والموجهين (Supervisor)">المشرفين والموجهين (Supervisor)</option>
+                        <option value="عناصر الاقتحام والممبار (Members)">عناصر الاقتحام والممبار (Members)</option>
                     </select>
-                    <textarea id="missionDesc" placeholder="📝 التوجيهات، المحاور، والأهداف المحددة للمداهمة..." style="height:85px;" autocomplete="off"></textarea>
-                    
-                    <button class="action-btn ai-btn" onclick="generateAIMissionPlan()">🤖 اشتقاق وتوليد خطة اقتحام تكتيكية (اسألني AI)</button>
-                    <button class="action-btn" id="addMission">أرشفة الخطة وتعميم محاور التحرك</button>
-                </div>
-                
-                <div class="card-panel" id="missionsLockArea">
-                    <div class="lock-screen" style="margin: 30px auto 0;">
-                        <h3>🔒 الأرشيف السحابي السري للمداهمات والعمليات</h3>
-                        <input id="missPass" type="password" placeholder="أدخل رمز تصريح الاطلاع العملياتي" autocomplete="off">
-                        <button class="action-btn" onclick="unlockSection('missPass', 'missionsRealView', 'missionsLockArea')">استعراض أرشيف الخطط</button>
-                    </div>
-                </div>
-                
-                <div id="missionsRealView" class="card-panel" style="display:none;">
-                    <h3 class="panel-title">📋 سجل خطط المداهمة المحفوظة بسجلات Firebase</h3>
-                    <div id="missionsList" class="data-list-container"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= 7. شؤون الترشيحات ================= -->
-        <div id="nominationsPanel" class="page">
-            <div class="dashboard-layout">
-                <div class="card-panel">
-                    <h3 class="panel-title">🎖️ نموذج تزكية وترشيح الكوادر للترقيات العليا</h3>
-                    <input id="nomineeCharName" placeholder="👤 اسم الضابط المرشح للتزكية" autocomplete="off">
-                    <input id="nomineeCurrentRank" placeholder="🎖️ المرتبة / الرتبة العسكرية الحالية" autocomplete="off">
-                    <input id="nomineeSector" placeholder="🏢 وحدة التعيين الحالية" autocomplete="off">
-                    <textarea id="nominationReason" placeholder="📝 السيرة الذاتية التكتيكية ومبررات الترشيح للترقية..." style="height:90px;" autocomplete="off"></textarea>
-                    
-                    <button class="action-btn ai-btn" onclick="evaluateNomineeAI()">🤖 تقييم كفاءة وملاءمة المرشح استدلالياً (اسألني AI)</button>
-                    <button class="action-btn" id="addNomination">رفع مستند التزكية للمراجعة القيادية</button>
-                </div>
-                
-                <div class="card-panel" id="nomLockArea">
-                    <div class="lock-screen" style="margin:20px auto 0;">
-                        <h3>🔒 كشف قرارات لجنة المراجعة والترقيات</h3>
-                        <input id="nomPass" type="password" placeholder="رمز المرور لإدارة الموارد البشرية" autocomplete="off">
-                        <button class="action-btn" onclick="unlockSection('nomPass', 'nominationsRealView', 'nomLockArea')">مراجعة طلبات الترشيح</button>
-                    </div>
-                </div>
-                
-                <div id="nominationsRealView" class="card-panel" style="display:none;">
-                    <h3 class="panel-title">📋 سجل الضباط المتقدمين للتزكية والترقية القيادية</h3>
-                    <div id="nominationsList" class="data-list-container"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= 8. مركز التقارير السرية ================= -->
-        <div id="reportsPanel" class="page">
-            <div class="dashboard-layout">
-                <div class="card-panel">
-                    <h3 class="panel-title">📤 صياغة وإدراج تقرير الحالة الجنائية والعملياتية</h3>
-                    <input id="repId" placeholder="🆔 الرقم التسلسلي المشفر للتقرير">
-                    <div style="display:flex; gap:10px;"><input id="repDate" type="date"><input id="repTime" type="time"></div>
-                    <input id="repLeader" placeholder="👮 الضابط المسؤول عن تدوين المحضر">
-                    <input id="repMembers" placeholder="👥 أطقم القوة الميدانية المنفذة">
-                    <select id="repType">
-                        <option>مداهمة مباغتة وعزل</option>
-                        <option>اقتحام تكتيكي عالي الكثافة</option>
-                        <option>تحرير رهاين وتطهير مربعات أمنية</option>
-                        <option>عملية استخباراتية سرية خاطفة</option>
+                    <select id="outfitWeapon">
+                        <option value="M4A1 Tactical Assault Rifle">M4A1 Tactical Assault Rifle</option>
+                        <option value="MP5 Submachine Gun Optimized">MP5 Submachine Gun Optimized</option>
+                        <option value="Remington 870 Tactical Shotgun">Remington 870 Tactical Shotgun</option>
                     </select>
-                    <input id="repLocation" placeholder="📍 الموقع الجغرافي / إحداثيات قطاع المداهمة">
-                    <textarea id="repDetails" placeholder="📝 ملخص وسيناريو الأحداث الميدانية بالتفصيل والدقة الجنائية..." style="height:95px;"></textarea>
+                    <select id="outfitVest">
+                        <option value="Heavy Plate Carrier Level IV (الدرع الثقيل)">Heavy Plate Carrier Level IV (الدرع الثقيل)</option>
+                        <option value="Light Recon Vest Level III (الدرع الخفيف)">Light Recon Vest Level III (الدرع الخفيف)</option>
+                    </select>
                     
-                    <button class="action-btn ai-btn" onclick="generateAIReportSummary()">🤖 إعادة صياغة المحضر بالأسلوب الجنائي الرسمي (اسألني AI)</button>
-                    <label style="display:flex; align-items:center; gap:8px; margin-bottom:15px; cursor:pointer; font-size: 13px;"><input id="secretReport" type="checkbox" style="width:auto; margin:0;"> 🔒 تصنيف الملف كتقرير سري جداً (المستوى الأحمر القيادي)</label>
-                    <button class="action-btn" id="saveReportBtn">أرشفة وحفظ التقرير نهائياً بالسيرفر السحابي</button>
+                    <button class="cyber-btn" onclick="generateTacticalOutfitCode()">إصدار وثيقة العتاد الرسمية</button>
                 </div>
-                
-                <div class="card-panel" style="display:flex; flex-direction:column; gap:15px;">
-                    <h3 class="panel-title">📂 الخزائن الرقمية للأرشيف المشفر</h3>
-                    
-                    <div id="repGeneralLock" class="lock-screen" style="margin: 0 0 15px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">
-                        <h4>📄 فتح أرشيف التقارير العادية والمحاضر الميدانية</h4>
-                        <input id="repPass" type="password" placeholder="أدخل رمز خزانة المستندات العامة" style="margin-top: 8px;" autocomplete="off">
-                        <button class="action-btn" onclick="unlockSection('repPass', 'reportsNormalView', 'repGeneralLock')">ولوج الخزانة العامة</button>
-                    </div>
+                <div class="cyber-panel">
+                    <div class="panel-head">📄 وثيقة التجهيز العسكري المعتمدة للطباعة</div>
+                    <div id="outfitPlaceholderText" style="color:var(--text-slate); text-align:center; padding-top:40px; font-size:13px;">قم بتعبئة النموذج لإنشاء الباركود ووثيقة الهندام الرسمية.</div>
+                    <div id="printOutfitReceipt"></div>
+                </div>
+            </div>
+        </div>
 
-                    <div id="repSecretLock" class="lock-screen" style="margin: 0;">
-                        <h4 style="color: var(--danger);">🚨 الخزنة الرئاسية المغلقة (التقارير السرية الحمراء)</h4>
-                        <input id="secRepPass" type="password" placeholder="أدخل الرمز السري للقيادة العليا العليا" style="margin-top: 8px;" autocomplete="off">
-                        <button class="action-btn" onclick="unlockSection('secRepPass', 'reportsSecretView', 'repSecretLock')" style="background: var(--danger); border-color: var(--danger); color: white;">تأكيد البصمة الرقمية والولوج</button>
-                    </div>
+        <!-- ================= 4. إدارة المداهمات والتنسيق التكتيكي ================= -->
+        <div id="view-ops" class="page-view">
+            <div class="cyber-grid">
+                <div class="cyber-panel">
+                    <div class="panel-head">🎯 تخطيط ورفع تعاميم المداهمات الأمنية الحية</div>
+                    <input id="opTitle" placeholder="الاسم التكتيكي للعملية الرمزية">
+                    <input id="opLeader" placeholder="👮 الضابط القائد المسؤول ميدانياً">
+                    <select id="opRiskLevel">
+                        <option value="CRITICAL - خطر للغاية">CRITICAL - خطورة عالية جداً</option>
+                        <option value="HIGH - خطر">HIGH - خطورة متوسطة</option>
+                        <option value="MEDIUM - اعتيادي">MEDIUM - مداهمة اعتيادية</option>
+                    </select>
+                    <textarea id="opPlanDesc" placeholder="📝 المحاور والتعليمات التكتيكية الصارمة للاقتحام..." style="height:100px;"></textarea>
                     
-                    <div id="reportsNormalView" style="display:none; margin-top:10px;">
-                        <h4 style="color:var(--gold); margin-bottom:10px; font-size: 14px;">📋 المحاضر والتقارير الميدانية المتاحة</h4>
-                        <div id="normalReportsContainer" class="data-list-container"></div>
-                    </div>
-                    
-                    <div id="reportsSecretView" style="display:none; margin-top:10px;">
-                        <h4 style="color:var(--danger); margin-bottom:10px; font-size: 14px;">🔒 المستندات التكتيكية المصنفة سرية للغاية</h4>
-                        <div id="secretReportsContainer" class="data-list-container"></div>
-                    </div>
+                    <button class="cyber-btn" style="margin-bottom:12px; border-color:var(--gold); color:var(--gold);" onclick="aiGenerateOpPlan()">🤖 اشتقاق وسيناريو التسلل بالذكاء الاصطناعي</button>
+                    <button class="cyber-btn" id="btnSaveOp">بث البرقية العملياتية وتثبيتها بالسيرفر</button>
+                </div>
+                <div class="cyber-panel">
+                    <div class="panel-head">📋 خطط المداهمات النشطة قيد التعميم والمتابعة</div>
+                    <div id="opsRealtimeContainer" class="data-view-scroll"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 5. أرشيف الخزنة السوداء المغلقة ================= -->
+        <div id="view-vault" class="page-view">
+            <div id="vaultLockScreen" class="secure-lock-gate">
+                <h3 style="color: var(--neon-red); margin-bottom:10px;">🚨 تحذير: أنت تحاول الدخول للأرشيف الأسود السري للغاية</h3>
+                <p style="color: var(--text-slate); font-size:12.5px; margin-bottom:20px;">هذا القسم يحتوي على محاضر الأحداث السرية والترشيحات الإدارية العليا للمجموعة</p>
+                <input id="vaultMasterKey" type="password" placeholder="أدخل رمز فك التشفير الرئاسي المشفر" style="text-align:center;">
+                <button class="cyber-btn danger" onclick="unlockMasterVault()">التحقق من الهوية المشفرة</button>
+            </div>
+
+            <div id="vaultRealContent" style="display:none;" class="cyber-grid">
+                <div class="cyber-panel">
+                    <div class="panel-head" style="color: var(--neon-red);">📂 سجل محاضر الأحداث السرية والتقارير الفيدرالية</div>
+                    <div id="vaultReportsContainer" class="data-view-scroll"></div>
+                </div>
+                <div class="cyber-panel">
+                    <div class="panel-head" style="color: var(--gold);">🎖️ تزكيات وترقيات الكوادر المرفوعة للقيادة</div>
+                    <div id="vaultNominationsContainer" class="data-view-scroll"></div>
                 </div>
             </div>
         </div>
 
     </div>
 
-<!-- ================= سكريبتات الأنظمة وقاعدة البيانات والـ AI ================= -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -676,354 +452,259 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const GLOBAL_SECURITY_CODE = "1029";
+const MASTER_PASSWORD = "1029";
 
-// 👥 قاعدة البيانات الأساسية لفرقة السوات والقيادة
-const armyDatabase = [
-    { code: "01", name: "FAHAD ALMUTAIRI", rank: "R-0 SWAT Chief", rankType: "chief", unit: "Command" },
-    { code: "02", name: "KARLOS ALMUTAIRI", rank: "R-1 Deputy Chief", rankType: "chief", unit: "Command" },
-    { code: "03", name: "Turki Al-Mutairi", rank: "R-2 Assistant Chief", rankType: "chief", unit: "Alpha" },
-    { code: "04", name: "James Morgan", rank: "R-3 Supervisor", rankType: "supervisor", unit: "Bravo" },
-    { code: "05", name: "Mov Marley", rank: "R-4 Member", rankType: "member", unit: "Alpha" },
-    { code: "06", name: "Sicr Exxon", rank: "R-5 Member", rankType: "member", unit: "Alpha" },
-    { code: "07", name: "Marcus Leno", rank: "R-6 Member", rankType: "member", unit: "Alpha" },
-    { code: "08", name: "James Kruise", rank: "R-7 Member", rankType: "member", unit: "Alpha" },
-    { code: "09", name: "Older Mohammed", rank: "R-8 Member", rankType: "member", unit: "Alpha" },
-    { code: "10", name: "Badr Al-Mutairi", rank: "R-9 Member", rankType: "member", unit: "Bravo" },
-    { code: "11", name: "ريان خالد", rank: "R-10 Member", rankType: "member", unit: "Bravo" },
-    { code: "12", name: "JOHN Marly", rank: "R-11 Member", rankType: "member", unit: "Bravo" },
-    { code: "13", name: "Ahmed Almutairi", rank: "R-12 Member", rankType: "member", unit: "Bravo" }
+const staticForces = [
+    { code: "01", name: "FAHAD ALMUTAIRI", rank: "R-0 SWAT Chief", unit: "Command" },
+    { code: "02", name: "KARLOS ALMUTAIRI", rank: "R-1 Deputy Chief", unit: "Command" },
+    { code: "03", name: "Turki Al-Mutairi", rank: "R-2 Assistant Chief", unit: "Alpha" },
+    { code: "04", name: "James Morgan", rank: "R-3 Supervisor", unit: "Bravo" },
+    { code: "05", name: "Mov Marley", rank: "R-4 Member", unit: "Alpha" },
+    { code: "06", name: "Sicr Exxon", rank: "R-5 Member", unit: "Alpha" },
+    { code: "07", name: "Marcus Leno", rank: "R-6 Member", unit: "Alpha" },
+    { code: "08", name: "James Kruise", rank: "R-7 Member", unit: "Alpha" },
+    { code: "09", name: "Older Mohammed", rank: "R-8 Member", unit: "Alpha" },
+    { code: "10", name: "Badr Al-Mutairi", rank: "R-9 Member", unit: "Bravo" },
+    { code: "11", name: "ريان خالد", rank: "R-10 Member", unit: "Bravo" },
+    { code: "12", name: "JOHN Marly", rank: "R-11 Member", unit: "Bravo" },
+    { code: "13", name: "Ahmed Almutairi", rank: "R-12 Member", unit: "Bravo" }
 ];
 
-let firebaseMembersList = [];
+let liveFirebaseMembers = [];
 
-function clearAllInputs() {
-    document.querySelectorAll("input, textarea").forEach(el => {
-        if(el.type !== "checkbox" && el.type !== "radio" && el.id !== "chatInput") {
-            el.value = "";
-        }
-    });
-}
-
-window.switchPage = function(pageId) {
-    clearAllInputs();
-    document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-        p.style.setProperty('display', 'none', 'important');
-    });
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+window.showView = function(viewId) {
+    document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active-view'));
+    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
     
-    const targetPage = document.getElementById(pageId);
-    if(targetPage) {
-        targetPage.classList.add('active');
-        targetPage.style.setProperty('display', 'block', 'important');
-    }
-    const targetBtn = document.getElementById('btn-' + pageId);
-    if(targetBtn) targetBtn.classList.add('active');
+    document.getElementById('view-' + viewId).classList.add('active-view');
+    document.getElementById('nav-' + viewId).classList.add('active');
 };
 
-window.unlockSection = function(inputId, targetPanelId, lockAreaId) {
-    const passValue = document.getElementById(inputId).value;
-    if(passValue === GLOBAL_SECURITY_CODE) {
-        document.getElementById(lockAreaId).style.setProperty('display', 'none', 'important');
-        const target = document.getElementById(targetPanelId);
-        target.style.setProperty('display', 'block', 'important');
-        alert("🔓 تم التحقق الأمني وفك تشفير البيانات بنجاح.");
-    } else {
-        alert("❌ رمز الوصول المدخل غير صحيح! تم رصد محاولة وصول غير مصرح بها.");
-    }
+window.toggleForm = function(formId) {
+    const f = document.getElementById(formId);
+    f.style.display = f.style.display === 'none' ? 'block' : 'none';
 };
 
-window.showInlineLock = function(lockBoxId) {
-    const box = document.getElementById(lockBoxId);
-    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+// 🗺️ فحص رادار الخرائط التفاعلي والمربعات الأمنية
+window.inspectGrid = function(gridId, infoText) {
+    const area = document.getElementById("gridReportArea");
+    area.style.display = "block";
+    area.innerHTML = `
+        <span style="color:var(--neon-red); font-weight:bold;">[📡 تقرير رادار السيطرة المربع ${gridId}]:</span><br>
+        الموقع الجغرافي: قطاع العمليات التكتيكي المشترك (${gridId})<br>
+        الحالة الحالية ورصد خلايا التهديد الجنائي: <span style="color:var(--gold);">${infoText}</span><br>
+        <span style="color:var(--neon-blue); font-size:11px;">تم التحديث تلقائياً بواسطة أنظمة الاستطلاع الرقمية المسيرة.</span>
+    `;
 };
 
-window.verifyInlineCode = function(inputId, formId, lockBoxId) {
-    const codeValue = document.getElementById(inputId).value;
-    if(codeValue === GLOBAL_SECURITY_CODE) {
-        document.getElementById(lockBoxId).style.setProperty('display', 'none', 'important');
-        document.getElementById(formId).style.display = 'block';
-    } else {
-        alert("❌ الرمز السري خطأ. تم إلغاء تفعيل صلاحية التعديل.");
-    }
-};
+// 🤖 محرك المعالجة والفرز الاستدلالي (المطور كلياً)
+window.executeConsoleCommand = function() {
+    const input = document.getElementById("consoleInput");
+    const cmd = input.value.trim().toLowerCase();
+    if(!cmd) return;
 
-// 🤖 محاكي ومحرك الـ AI التكتيكي لفرز الأسماء
-window.sendChatMessage = function() {
-    const chatInput = document.getElementById("chatInput");
-    const query = chatInput.value.trim();
-    if(!query) return;
+    const logsContainer = document.getElementById("consoleLogs");
+    
+    const userLine = document.createElement("div");
+    userLine.className = "log-line user-query";
+    userLine.innerText = `> ${input.value}`;
+    logsContainer.appendChild(userLine);
+    
+    input.value = "";
 
-    const messagesContainer = document.getElementById("chatMessages");
-    
-    // رسالة المستخدم
-    const userMsg = document.createElement("div");
-    userMsg.className = "msg user";
-    userMsg.innerText = query;
-    messagesContainer.appendChild(userMsg);
-    
-    chatInput.value = "";
-    
-    // معالجة الرد الاستدلالي
     setTimeout(() => {
-        const aiMsg = document.createElement("div");
-        aiMsg.className = "msg ai";
+        const aiLine = document.createElement("div");
+        aiLine.className = "log-line result";
         
-        let allCurrentMembers = [...armyDatabase, ...firebaseMembersList];
-        let resultText = "";
+        let pool = [...staticForces, ...liveFirebaseMembers];
+        let reply = "";
 
-        if(query.includes("member") || query.includes("رتبة ممبر") || query.includes("رتبه ممبر")) {
-            const filtered = allCurrentMembers.filter(m => m.rank.toLowerCase().includes("member"));
-            resultText = "🔍 حصر رتبة [Member]:\n" + filtered.map((m, i) => `${i+1}. الاسم: ${m.name} | الرقم: ${m.code} | الفرقة: ${m.unit}`).join("\n");
-        } 
-        else if(query.includes("الفا") || query.includes("alpha") || query.includes("ألفا")) {
-            const filtered = allCurrentMembers.filter(m => m.unit.toLowerCase().includes("alpha"));
-            resultText = "⚡ حصر أفراد فرقة [Alpha]:\n" + filtered.map((m, i) => `${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
-        } 
-        else if(query.includes("برافو") || query.includes("bravo")) {
-            const filtered = allCurrentMembers.filter(m => m.unit.toLowerCase().includes("bravo"));
-            resultText = "🔥 حصر أفراد فرقة [Bravo]:\n" + filtered.map((m, i) => `${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
-        } 
-        else if(query.includes("كامل") || query.includes("القوة") || query.includes("سوات") || query.includes("swat")) {
-            resultText = "🦅 بيان القوة البشرية الإجمالي المعتمد بالمجموعة:\n" + allCurrentMembers.map((m, i) => `[${m.code}] - ${m.name} (${m.rank}) - وحدة: ${m.unit}`).join("\n");
-        } 
-        else {
-            resultText = "🤖 تم تلقي الأمر التكتيكي. لمطابقة الكشوفات، يرجى كتابة إحدى العبارات المخصصة مثل (اسماء رتبة member، اسماء فرقة الفا، اسماء فرقة برافو، أو كشف القوة كاملة).";
+        if(cmd.includes("member") || cmd.includes("رتبة ممبر") || cmd.includes("رتبه ممبر")) {
+            const matches = pool.filter(p => p.rank.toLowerCase().includes("member"));
+            reply = `[AI RESOLUTION] حصر الكوادر الميدانية برتبة ممبر:\n` + matches.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرقم: ${m.code} | فرقة: ${m.unit}`).join("\n");
+        } else if(cmd.includes("الفا") || cmd.includes("alpha")) {
+            const matches = pool.filter(p => p.unit.toLowerCase().includes("alpha"));
+            reply = `[AI RESOLUTION] حصر تشكيل فرقة الاقتحام [Alpha]:\n` + matches.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
+        } else if(cmd.includes("برافو") || cmd.includes("bravo")) {
+            const matches = pool.filter(p => p.unit.toLowerCase().includes("bravo"));
+            reply = `[AI RESOLUTION] حصر تشكيل فرقة الإسناد [Bravo]:\n` + matches.map((m, i) => `  ${i+1}. الاسم: ${m.name} | الرتبة: ${m.rank}`).join("\n");
+        } else if(cmd.includes("كامل") || cmd.includes("القوة") || cmd.includes("سوات") || cmd.includes("swat")) {
+            reply = `[AI RESOLUTION] تقرير القوة الإجمالية الحالية المربوطة بسيرفر المزامنة:\n` + pool.map(m => `  [ID: ${m.code}] ${m.name} -> الرتبة: ${m.rank} | التمركز: ${m.unit}`).join("\n");
+        } else {
+            reply = `[AI ERROR] الأمر غير مفهوم أمنياً. يرجى استخدام كلمات مفتاحية صريحة للفرز: (فرقة الفا، فرقة برافو، رتبة member، كامل القوة).`;
         }
 
-        aiMsg.innerText = resultText;
-        messagesContainer.appendChild(aiMsg);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 400);
+        aiLine.innerText = reply;
+        logsContainer.appendChild(aiLine);
+        logsContainer.scrollTop = logsContainer.scrollHeight;
+    }, 300);
 };
 
-// 🤖 توليد الخطط بالـ AI التكتيكي لقسم المداهمات والعمليات
-window.generateAIMissionPlan = function() {
-    const title = document.getElementById("missionTitle").value || "عملية مداهمة خاطفة";
-    const leader = document.getElementById("missionLeader").value || "قائد السيرفر";
-    
-    document.getElementById("missionDesc").value = `[سيناريو اقتحام مولد تلقائياً بواسطة اسألني AI]:\nبناءً على المعطيات الجنائية لعملية (${title})، تتقدم قوة الطليعة من المحور الغربي بقيادة الضابط (${leader}) لتطهير المداخل واستباق الهجوم عبر رمي القنابل الصوتية المشوشة، يليها تقدم طاقم الدعم للسيطرة على الهدف وتحييد خطورة المطلوبين بشكل فوري وعزل الساحة تماماً.`;
+// 🤖 مولد العتاد والهندام التكتيكي (جديد وفخم)
+window.generateTacticalOutfitCode = function() {
+    const name = document.getElementById("outfitTargetName").value || "ضابط ميداني مجهول";
+    const rank = document.getElementById("outfitRankSelection").value;
+    const weapon = document.getElementById("outfitWeapon").value;
+    const vest = document.getElementById("outfitVest").value;
+
+    const placeholder = document.getElementById("outfitPlaceholderText");
+    const receipt = document.getElementById("printOutfitReceipt");
+
+    placeholder.style.display = "none";
+    receipt.style.display = "block";
+
+    receipt.innerHTML = `
+        <div style="border-bottom:1px dashed var(--gold); padding-bottom:10px; margin-bottom:15px; text-align:center;">
+            <h4 style="color:var(--gold);">وثيقة تسليح وتجهيز معتمدة</h4>
+            <span style="font-size:11px; color:var(--text-slate);">SERIAL: SEC-OUTFIT-${Math.floor(1000 + Math.random() * 9000)}</span>
+        </div>
+        <p><b>👤 الاسم المستهدف:</b> ${name}</p>
+        <p><b>🎖️ المستوى الرتبي:</b> ${rank}</p>
+        <p><b>🔫 السلاح الأساسي المعتمد:</b> ${weapon}</p>
+        <p><b>🛡️ نوع درع المقذوفات:</b> ${vest}</p>
+        <div style="margin-top:15px; background:white; color:black; padding:8px; text-align:center; font-weight:bold; letter-spacing:4px; font-size:12px;">
+            ||||| | |||| ||| || |||||| |
+        </div>
+        <div style="font-size:10px; color:var(--neon-blue); text-align:center; margin-top:10px;">نظام التعميد الموحد - جاهز للطباعة والتنفيذ الميداني فوراً</div>
+    `;
 };
 
-// 🤖 تقييم كفاءة المرشح قيادياً بالذكاء الاصطناعي لفئات الرتب
-window.evaluateNomineeAI = function() {
-    const name = document.getElementById("nomineeCharName").value;
-    const rank = document.getElementById("nomineeCurrentRank").value;
-    if(!name) { alert("يرجى إدخال اسم الكادر لتقييمه"); return; }
+// 🤖 توليد الخطط العسكرية التلقائية بالـ AI
+window.aiGenerateOpPlan = function() {
+    const title = document.getElementById("opTitle").value || "مداهمة مباغتة وعزل";
+    const leader = document.getElementById("opLeader").value || "قائد السيرفر المسؤول";
 
-    document.getElementById("nominationReason").value = `[تقرير الأهلية الرقمي - اسألني AI]:\nبعد تحليل ومراجعة سجل الأنشطة والالتزام العسكري للضابط المرشح (${name}) ذو الرتبة الحالية (${rank})، يشير مؤشر الكفاءة القيادي إلى نسبة استحقاق متقدمة تبلغ 94% نظراً لسرعة الاستجابة العملياتية والتقيد الصارم ببند الولاء وحفظ أسرار المنصة وتطبيق معايير العتاد التكتيكي.`;
+    document.getElementById("opPlanDesc").value = `[محاكاة العقل التكتيكي AI]:\nتقرر تحرك أطقم القوة الضاربة بقيادة (${leader}) لإغلاق المخارج الطارئة للقطاع الجغرافي المستهدف في عملية (${title})، مع ضرورة إلقاء قنابل تشتيت الرؤية (Flashbangs) بالتزامن مع دخول وحدة الـ Members لتصفية زوايا الغرفة بدقة 100% وعزل خلية التهديد بالكامل.`;
 };
 
-// 🤖 صياغة التقرير الجنائي بأسلوب احترافي للتقارير
-window.generateAIReportSummary = function() {
-    const leader = document.getElementById("repLeader").value || "قائد الفرقة الميداني";
-    const loc = document.getElementById("repLocation").value || "موقع النزاع";
-    
-    document.getElementById("repDetails").value = `مذكرة إنهاء مهمة رسمية:\nفي يوم وتاريخ محدد، تحركت مفرزة الاقتحام تحت إشراف الضابط المسؤول (${leader}) صوب القطاع المستهدف (${loc}) لإنفاذ مقتضيات الحالة الأمنية، وقد تم فرض طوق أمني تكتيكي محكم أدى إلى تحييد مصادر التهديد وتطهير المربع بالكامل وحفظ الأحراز والبيانات المشفرة دون خسائر مادية أو بشرية في القوة.`;
+// 🔓 فك تشفير الخزنة الرئاسية الموحدة (الترشيحات والتقارير)
+window.unlockMasterVault = function() {
+    const pass = document.getElementById("vaultMasterKey").value;
+    if(pass === MASTER_PASSWORD) {
+        document.getElementById("vaultLockScreen").style.setProperty('display', 'none', 'important');
+        document.getElementById("vaultRealContent").style.setProperty('display', 'grid', 'important');
+        alert("🔓 تم التحقق من الكود الرقمي بنجاح. فك تشفير مستندات التقارير والترشيحات العليا.");
+    } else {
+        alert("❌ رمز الولاء والعبور خاطئ! تم إلغاء تفعيل الوصول للأرشيف الأسود.");
+    }
 };
 
-// ================= إدارة عمليات الحفظ والمزامنة الحية عبر الـ Firebase =================
+// ================= عمليات المزامنة الحية عبر قاعدة خوادم Firebase =================
 
-// 1. إدارة كشف القوة البشرية (الأعضاء)
-document.getElementById("saveMemberBtn").addEventListener("click", async () => {
-    const code = document.getElementById("newMemNo").value.trim();
-    const name = document.getElementById("newMemName").value.trim();
-    const rank = document.getElementById("newMemRank").value.trim();
-    const unit = document.getElementById("newMemUnit").value.trim();
+// 1. مزامنة القوة البشرية
+document.getElementById("btnSaveMember").addEventListener("click", async () => {
+    const code = document.getElementById("fCode").value.trim();
+    const name = document.getElementById("fName").value.trim();
+    const rank = document.getElementById("fRank").value.trim();
+    const unit = document.getElementById("fUnit").value.trim();
 
-    if(!code || !name || !rank || !unit) { alert("الرجاء تعبئة كافة الحقول الأمنية للضابط!"); return; }
+    if(!code || !name || !rank || !unit) { alert("أكمل حقول الضابط أولاً!"); return; }
 
     try {
         await addDoc(collection(db, "members"), { code, name, rank, unit, timestamp: Date.now() });
-        alert("✅ تم إدراج الضابط وتعميده بجدول القوة البشرية السحابي.");
-        clearAllInputs();
-        document.getElementById("addMemberForm").style.display = 'none';
-    } catch (e) { alert("خطأ بالاتصال بالسيرفر: " + e); }
+        alert("✅ تم رفع الكادر الجديد وتعميده سحابياً بنجاح.");
+        document.getElementById("forceAddForm").style.display = "none";
+        document.getElementById("fCode").value = ""; document.getElementById("fName").value = "";
+        document.getElementById("fRank").value = ""; document.getElementById("fUnit").value = "";
+    } catch(e) { alert("خطأ في الخادم السحابي: " + e); }
 });
 
 onSnapshot(collection(db, "members"), (snapshot) => {
-    const tbody = document.getElementById("dynamicMembersTable");
+    const tbody = document.getElementById("dynamicMembersList");
     tbody.innerHTML = "";
-    firebaseMembersList = [];
-    let count = 13;
-
-    snapshot.forEach((docSnap) => {
+    liveFirebaseMembers = [];
+    snapshot.forEach(docSnap => {
         const data = docSnap.data();
-        firebaseMembersList.push(data);
-        count++;
-
+        liveFirebaseMembers.push(data);
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${data.code}</td>
             <td>${data.name}</td>
             <td>${data.rank}</td>
             <td>${data.unit}</td>
-            <td><button class="delete-table-btn" onclick="deleteMilitaryDoc('members', '${docSnap.id}')">حذف</button></td>
+            <td><button class="cyber-btn danger" style="padding:3px 8px; font-size:11px;" onclick="deleteCloudRecord('members', '${docSnap.id}')">حذف</button></td>
         `;
         tbody.appendChild(tr);
     });
-    document.getElementById("statMembersCount").innerText = count;
 });
 
-// 2. إدارة خلية المطلوبين
-document.getElementById("addWanted").addEventListener("click", async () => {
-    const name = document.getElementById("wantedName").value.trim();
-    const crime = document.getElementById("wantedCrime").value.trim();
+// 2. مزامنة الخطط والمداهمات التكتيكية
+document.getElementById("btnSaveOp").addEventListener("click", async () => {
+    const title = document.getElementById("opTitle").value.trim();
+    const leader = document.getElementById("opLeader").value.trim();
+    const risk = document.getElementById("opRiskLevel").value;
+    const desc = document.getElementById("opPlanDesc").value.trim();
 
-    if(!name || !crime) { alert("يرجى إدخال اسم المستهدف ونوع الجرم!"); return; }
+    if(!title || !leader || !desc) { alert("أدخل تفاصيل ومحاور الخطة الميدانية!"); return; }
 
     try {
-        await addDoc(collection(db, "wanted"), { name, crime, timestamp: Date.now() });
-        alert("🚨 تم إصدار برقية التعميم وتثبيت الهدف في خلية المطلوبين.");
-        clearAllInputs();
-    } catch(e) { alert(e); }
-});
-
-onSnapshot(collection(db, "wanted"), (snapshot) => {
-    const container = document.getElementById("wantedList");
-    container.innerHTML = "";
-    snapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "item-card";
-        card.style.borderRightColor = "var(--danger)";
-        card.innerHTML = `
-            <h4>🎯 المستهدف: ${data.name}</h4>
-            <p>🚷 تصنيف الخطورة: ${data.crime}</p>
-            <button class="delete-table-btn" style="margin-top:8px;" onclick="deleteMilitaryDoc('wanted', '${docSnap.id}')">إسقاط التعميم (تحييد)</button>
-        `;
-        container.appendChild(card);
-    });
-});
-
-// 3. إدارة كشوفات وأرشيف العمليات والمداهمات
-document.getElementById("addMission").addEventListener("click", async () => {
-    const title = document.getElementById("missionTitle").value.trim();
-    const leader = document.getElementById("missionLeader").value.trim();
-    const members = document.getElementById("missionMembers").value.trim();
-    const status = document.getElementById("missionStatus").value;
-    const desc = document.getElementById("missionDesc").value.trim();
-
-    if(!title || !leader || !desc) { alert("أدخل البيانات الأساسية للعملية التكتيكية أولاً!"); return; }
-
-    try {
-        await addDoc(collection(db, "missions"), { title, leader, members, status, desc, timestamp: Date.now() });
-        alert("✅ تم تدوين خطة المداهمة وإدراجها بالأرشيف السحابي بنجاح.");
-        clearAllInputs();
+        await addDoc(collection(db, "missions"), { title, leader, risk, desc, timestamp: Date.now() });
+        alert("🛰️ تم بث برقية المداهمة وحفظها بملفات العمليات المشتركة الحية.");
+        document.getElementById("opTitle").value = ""; document.getElementById("opLeader").value = ""; document.getElementById("opPlanDesc").value = "";
     } catch(e) { alert(e); }
 });
 
 onSnapshot(collection(db, "missions"), (snapshot) => {
-    const container = document.getElementById("missionsList");
+    const container = document.getElementById("opsRealtimeContainer");
     container.innerHTML = "";
-    snapshot.forEach((docSnap) => {
+    snapshot.forEach(docSnap => {
         const data = docSnap.data();
         const card = document.createElement("div");
-        card.className = "item-card";
+        card.className = "tactical-card";
         card.innerHTML = `
-            <h4>🎯 العملية الرمزية: ${data.title}</h4>
-            <p><b>👮 المسؤول:</b> ${data.leader} | <b>👥 الطاقم:</b> ${data.members}</p>
-            <p><b>⏳ الحالة الميدانية:</b> ${data.status}</p>
-            <p style="background:#04070a; padding:8px; border-radius:4px; margin-top:5px; color:#94a3b8;">${data.desc}</p>
-            <button class="delete-table-btn" style="margin-top:8px;" onclick="deleteMilitaryDoc('missions', '${docSnap.id}')">شطب الملف</button>
+            <h4 style="color:var(--neon-blue); font-size:14px; margin-bottom:5px;">🎯 خطة عملية: ${data.title}</h4>
+            <p style="font-size:12.5px; margin:3px 0;"><b>👮 القائد المسؤول:</b> ${data.leader} | <b>⚠️ مستوى الخطورة:</b> <span style="color:var(--neon-red);">${data.risk}</span></p>
+            <p style="background:#02050b; padding:8px; border-radius:4px; margin-top:6px; font-size:12.5px; color:#cbd5e1; border:1px solid rgba(0,240,255,0.05);">${data.desc}</p>
+            <button class="cyber-btn danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:8px;" onclick="deleteCloudRecord('missions', '${docSnap.id}')">شطب وإغلاق الملف</button>
         `;
         container.appendChild(card);
     });
 });
 
-// 4. إدارة شؤون التزكيات والترشيحات
-document.getElementById("addNomination").addEventListener("click", async () => {
-    const name = document.getElementById("nomineeCharName").value.trim();
-    const currentRank = document.getElementById("nomineeCurrentRank").value.trim();
-    const sector = document.getElementById("nomineeSector").value.trim();
-    const reason = document.getElementById("nominationReason").value.trim();
-
-    if(!name || !currentRank || !reason) { alert("يرجى تعبئة استمارة التزكية التكتيكية كاملة!"); return; }
-
-    try {
-        await addDoc(collection(db, "nominations"), { name, currentRank, sector, reason, timestamp: Date.now() });
-        alert("🎖️ تم رفع ملف التزكية وإرساله بصفة رسمية إلى خادم المراجعة الإدارية.");
-        clearAllInputs();
-    } catch(e) { alert(e); }
+// 3. سحب وعرض التقارير والترشيحات السحابية داخل الخزنة المشفرة
+onSnapshot(collection(db, "reports"), (snapshot) => {
+    const container = document.getElementById("vaultReportsContainer");
+    container.innerHTML = "";
+    snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const card = document.createElement("div");
+        card.className = "tactical-card";
+        card.style.borderRightColor = "var(--neon-red)";
+        card.innerHTML = `
+            <h5 style="color:var(--neon-red);">📄 تقرير رقم: ${data.repId || 'M-CONF'}</h5>
+            <p style="font-size:12px; margin:4px 0;"><b>المسؤول:</b> ${data.leader} | <b>الموقع:</b> ${data.loc || 'غير محدد'}</p>
+            <p style="font-size:12px; background:#010307; padding:6px; color:#cbd5e1;">${data.details}</p>
+            <button class="cyber-btn danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:5px;" onclick="deleteCloudRecord('reports', '${docSnap.id}')">إتلاف نهائي</button>
+        `;
+        container.appendChild(card);
+    });
 });
 
 onSnapshot(collection(db, "nominations"), (snapshot) => {
-    const container = document.getElementById("nominationsList");
+    const container = document.getElementById("vaultNominationsContainer");
     container.innerHTML = "";
-    snapshot.forEach((docSnap) => {
+    snapshot.forEach(docSnap => {
         const data = docSnap.data();
         const card = document.createElement("div");
-        card.className = "item-card";
+        card.className = "tactical-card";
         card.style.borderRightColor = "var(--gold)";
         card.innerHTML = `
-            <h4>👤 المرشح: ${data.name}</h4>
-            <p>🎖️ الرتبة الحالية: ${data.currentRank} | القطاع: ${data.sector}</p>
-            <p style="font-size:12.5px; color:#94a3b8; margin-top:6px;"><b>📝 المبررات والتقييم:</b> ${data.reason}</p>
-            <button class="delete-table-btn" style="margin-top:8px;" onclick="deleteMilitaryDoc('nominations', '${docSnap.id}')">أرشفة وإغلاق الطلب</button>
+            <h5 style="color:var(--gold);">🎖️ مرشح للتزكية: ${data.name}</h5>
+            <p style="font-size:12px; margin:3px 0;"><b>المرتبة الحالية:</b> ${data.currentRank} | <b>الوحدة:</b> ${data.sector || 'SWAT'}</p>
+            <p style="font-size:12px; color:#a0aec0;">${data.reason}</p>
+            <button class="cyber-btn danger" style="padding:2px 8px; font-size:11px; width:auto; margin-top:5px;" onclick="deleteCloudRecord('nominations', '${docSnap.id}')">أرشفة وإلغاء</button>
         `;
         container.appendChild(card);
     });
 });
 
-// 5. إدارة مركز التقارير والملفات المغلقة بسيرفر الفايربيس
-document.getElementById("saveReportBtn").addEventListener("click", async () => {
-    const repId = document.getElementById("repId").value.trim();
-    const repDate = document.getElementById("repDate").value;
-    const repTime = document.getElementById("repTime").value;
-    const leader = document.getElementById("repLeader").value.trim();
-    const members = document.getElementById("repMembers").value.trim();
-    const type = document.getElementById("repType").value;
-    const loc = document.getElementById("repLocation").value.trim();
-    const details = document.getElementById("repDetails").value.trim();
-    const isSecret = document.getElementById("secretReport").checked;
-
-    if(!repId || !leader || !details) { alert("يرجى إدخال المعرف، اسم الكاتب ومحتوى محضر الأحداث!"); return; }
-
-    try {
-        await addDoc(collection(db, "reports"), { repId, repDate, repTime, leader, members, type, loc, details, isSecret, timestamp: Date.now() });
-        alert("📄 تم حفظ وأرشفة محضر الحالة بنجاح وتأمينه داخل نظام خزانة المستندات.");
-        document.getElementById("secretReport").checked = false;
-        clearAllInputs();
-    } catch(e) { alert(e); }
-});
-
-onSnapshot(collection(db, "reports"), (snapshot) => {
-    const normalContainer = document.getElementById("normalReportsContainer");
-    const secretContainer = document.getElementById("secretReportsContainer");
-    
-    normalContainer.innerHTML = "";
-    secretContainer.innerHTML = "";
-
-    snapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "item-card";
-        card.innerHTML = `
-            <h4>📄 تقرير رقم: ${data.repId} | التصنيف: ${data.type}</h4>
-            <p><b>📍 الموقع:</b> ${data.loc} | <b>📅 التوقيت:</b> ${data.repDate} ${data.repTime}</p>
-            <p><b>👮 التدوين:</b> ${data.leader} | <b>👥 القوة المشتركة:</b> ${data.members}</p>
-            <p style="background:#04070a; padding:8px; border-radius:4px; margin-top:6px; font-size:12.5px; color:#e2e8f0;">${data.details}</p>
-            <div class="meta">توقيت الأرشفة التلقائي بالسيرفر: ${new Date(data.timestamp).toLocaleString('ar-EG')}</div>
-            <button class="delete-table-btn" style="margin-top:8px;" onclick="deleteMilitaryDoc('reports', '${docSnap.id}')">إتلاف مستند المحضر</button>
-        `;
-
-        if(data.isSecret) {
-            card.style.borderRightColor = "var(--danger)";
-            secretContainer.appendChild(card);
-        } else {
-            normalContainer.appendChild(card);
-        }
-    });
-});
-
-// دالة عامة لحذف المستندات والبيانات التكتيكية من الفايربيس
-window.deleteMilitaryDoc = async function(collectionName, documentId) {
-    if(confirm("⚠️ تأكيد الإجراء التكتيكي: هل أنت متأكد من رغبتك في إتلاف وحذف هذا السجل نهائياً من قاعدة البيانات السحابية؟")) {
+// دالة الحذف الموحدة للسجلات السحابية
+window.deleteCloudRecord = async function(coll, docId) {
+    if(confirm("⚠️ تنبيه أمني: هل أنت متأكد من رغبتك في مسح هذا الملف وإتلاف أحرازه نهائياً من سيرفر Firebase؟")) {
         try {
-            await deleteDoc(doc(db, collectionName, documentId));
-            alert("🗑️ تم مسح المستند وتحديث السيرفر المركزي بنجاح.");
-        } catch(e) { alert("فشل الحذف: " + e); }
+            await deleteDoc(doc(db, coll, docId));
+            alert("🗑️ تم مسح السجل وتحديث السيرفر المركزي بنجاح.");
+        } catch(e) { alert("فشل الإجراء: " + e); }
     }
 };
 
